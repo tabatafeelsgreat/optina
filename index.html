@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Приход Иосифа Оптинского</title>
+<meta name="description" content="Русская православная церковь преподобного Иосифа Оптинского (РПЦЗ), Норфолк и Вирджиния-Бич. Расписание служб, записки, таинства, строительство храма.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: одна длинная страница, как храмовый листок: узкая колонка текста, красные «рубрики» как в богослужебных книгах, широкие полосы для разделов */
+:root{
+  --bg:#f6f5f1; --paper:#ffffff; --ink:#1f2626; --muted:#5d6563; --line:#dcd9d0;
+  --red:#a3261b; --red-soft:#f3e3df; --gold:#9a7b33; --band:#ecebe5;
+  --display:"Old Standard TT", "Times New Roman", Georgia, serif;
+  --body:"Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
+  --wrap:68rem; --text:38rem;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#151918; --paper:#1d2221; --ink:#ebe8e1; --muted:#a3a9a5; --line:#323936;
+  --red:#e0675a; --red-soft:#3a201d; --gold:#cfae62; --band:#1a1f1e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151918; --paper:#1d2221; --ink:#ebe8e1; --muted:#a3a9a5; --line:#323936;
+  --red:#e0675a; --red-soft:#3a201d; --gold:#cfae62; --band:#1a1f1e; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+a{color:var(--red);text-underline-offset:.18em}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+img{max-width:100%}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4.5vw,2.9rem)}
+h3{font-size:1.45rem}
+p{margin:0}
+.rubric{font:600 .78rem/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.muted{color:var(--muted)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:1rem;min-height:3.6rem}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--ink);font-family:var(--display);font-size:1.25rem;white-space:nowrap}
+.brand svg{width:22px;height:30px;flex:none}
+.nav{display:flex;gap:1.2rem;margin-left:auto;font-size:.92rem}
+.nav a{color:var(--ink);text-decoration:none}
+.nav a:hover{color:var(--red)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;border:1px solid var(--red);background:var(--red);color:var(--paper);font:500 .95rem/1 var(--body);padding:.8rem 1.15rem;border-radius:2px;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--red)}
+.btn:hover{filter:brightness(1.08)}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink);padding:.45rem .7rem;font:500 .9rem var(--body);border-radius:2px}
+@media (max-width:900px){
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:.4rem clamp(16px,4vw,40px) 1rem}
+  .nav a{padding:.6rem 0;border-bottom:1px solid var(--line)}
+  .nav.open{display:flex}
+  .menu-btn{display:block}
+  .top .btn{display:none}
+}
+
+/* hero */
+.hero{padding-block:clamp(2.5rem,7vw,5.5rem) clamp(2rem,5vw,4rem)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(2rem,5vw,4rem);align-items:end}
+.hero h1{font-size:clamp(2.6rem,7vw,5.2rem);letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--red)}
+.hero .lead{margin-top:1.4rem;max-width:var(--text);font-size:1.15rem;color:var(--muted)}
+.hero .actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.hero-art{justify-self:center;width:min(100%,300px)}
+.hero-art svg{width:100%;height:auto;display:block}
+@media (max-width:760px){.hero .wrap{grid-template-columns:1fr}.hero-art{width:min(70%,240px);order:-1}}
+
+/* today strip */
+.strip{border-block:1px solid var(--line);background:var(--paper)}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.strip .cell{padding:1.2rem 1.2rem 1.2rem 0;display:grid;gap:.3rem;min-width:0}
+.strip .cell+.cell{padding-left:1.2rem;border-left:1px solid var(--line)}
+.strip b{font-family:var(--display);font-weight:400;font-size:1.35rem;font-variant-numeric:tabular-nums}
+@media (max-width:760px){.strip .wrap{grid-template-columns:1fr 1fr}.strip .cell:nth-child(3){padding-left:0;border-left:0}.strip .cell:nth-child(n+3){border-top:1px solid var(--line)}}
+
+section{padding-block:clamp(3rem,8vw,6rem)}
+.band{background:var(--band)}
+.head{display:grid;gap:.8rem;margin-bottom:2.5rem;max-width:44rem}
+.head p{color:var(--muted)}
+
+/* history */
+.history{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,4.5rem)}
+@media (max-width:860px){.history{grid-template-columns:1fr}}
+.prose{max-width:var(--text);display:grid;gap:1rem}
+.prose .initial::first-letter{float:left;font-family:var(--display);color:var(--red);font-size:4.2em;line-height:.8;padding:.08em .1em 0 0}
+.timeline{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.timeline li{position:relative;padding:0 0 1.5rem 1.6rem;display:grid;gap:.25rem}
+.timeline li::before{content:"";position:absolute;left:-5px;top:.55rem;width:9px;height:9px;background:var(--bg);border:1px solid var(--red);transform:rotate(45deg)}
+.band .timeline li::before{background:var(--band)}
+.timeline .y{font-family:var(--display);font-size:1.3rem;color:var(--red);font-variant-numeric:tabular-nums}
+.timeline li:last-child{padding-bottom:0}
+
+/* clergy / trustees */
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.person{background:var(--paper);padding:1.4rem;display:grid;gap:.35rem;align-content:start}
+.person .role{font-size:.88rem;color:var(--muted)}
+.person h3{font-size:1.3rem}
+.trust{margin-top:3rem;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:2rem;align-items:start}
+.trust ul{margin:0;padding:0;list-style:none;columns:2 14rem;column-gap:2rem}
+.trust li{padding:.5rem 0;border-bottom:1px solid var(--line);break-inside:avoid}
+@media (max-width:760px){.trust{grid-template-columns:1fr}}
+
+/* schedule */
+.week{display:grid;gap:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:9rem 5rem minmax(0,1fr);gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.row .day{font-family:var(--display);font-size:1.2rem}
+.row .t{font-variant-numeric:tabular-nums;color:var(--red);font-weight:600}
+.row small{display:block;color:var(--muted);font-size:.9rem}
+@media (max-width:560px){.row{grid-template-columns:4.5rem minmax(0,1fr)}.row .day{grid-column:1/-1}}
+.notice{margin-top:1.6rem;padding:1rem 1.2rem;border:1px dashed var(--gold);color:var(--muted);font-size:.95rem;max-width:44rem}
+
+/* notes */
+.notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,4vw,3.5rem)}
+@media (max-width:860px){.notes{grid-template-columns:1fr}}
+.price{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.price td{padding:.7rem 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+.price td:last-child{text-align:right;white-space:nowrap;font-weight:600}
+.price small{color:var(--muted)}
+form.card{background:var(--paper);border:1px solid var(--line);padding:clamp(1.2rem,3vw,2rem);display:grid;gap:1rem}
+label{display:grid;gap:.35rem;font-size:.92rem;font-weight:500}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:2px;padding:.65rem .75rem;width:100%}
+textarea{min-height:7.5rem;resize:vertical}
+.seg{display:flex;border:1px solid var(--line)}
+.seg label{flex:1;display:block;text-align:center;padding:.6rem;cursor:pointer;font-weight:500}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label:has(input:checked){background:var(--red);color:var(--paper)}
+.seg label:has(input:focus-visible){outline:2px solid var(--red);outline-offset:-4px}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:1rem}
+.total b{font-family:var(--display);font-size:1.6rem;font-weight:400;font-variant-numeric:tabular-nums}
+.hint{font-size:.85rem;color:var(--muted);font-weight:400}
+.result{background:var(--red-soft);padding:1rem;font-size:.95rem}
+
+/* activity */
+.acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,2.5rem)}
+@media (max-width:900px){.acts{grid-template-columns:1fr}}
+.act{display:grid;gap:.8rem;align-content:start;padding-top:1.2rem;border-top:2px solid var(--red)}
+.act dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.35rem .9rem;font-size:.95rem}
+.act dt{color:var(--muted)}
+.act dd{margin:0}
+.act ul{margin:0;padding-left:1.1rem;display:grid;gap:.35rem;font-size:.97rem}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.proj{background:var(--paper);padding:1.6rem;display:grid;gap:.7rem;align-content:start;text-decoration:none;color:var(--ink)}
+.proj:hover h3{color:var(--red)}
+.proj .go{color:var(--red);font-weight:500;font-size:.95rem}
+@media (max-width:860px){.projects{grid-template-columns:1fr}}
+
+/* contacts */
+.contacts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,4vw,4rem)}
+@media (max-width:860px){.contacts{grid-template-columns:1fr}}
+.kv{display:grid;gap:1.1rem}
+.kv div{display:grid;gap:.15rem}
+.kv span{font-size:.85rem;color:var(--muted)}
+.kv b{font-weight:500;font-size:1.1rem;font-variant-numeric:tabular-nums}
+.route{display:grid;gap:1.2rem}
+.route div{padding-left:1rem;border-left:2px solid var(--line)}
+.copy{margin-left:.4rem;font:500 .78rem var(--body);background:none;border:1px solid var(--line);color:var(--muted);padding:.15rem .45rem;border-radius:2px;cursor:pointer}
+
+/* donate */
+.donate .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2rem;align-items:center}
+@media (max-width:760px){.donate .wrap{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:2.5rem;font-size:.88rem;color:var(--muted)}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.5rem}
+footer .links{display:flex;flex-wrap:wrap;gap:1rem}
+@media (max-width:700px){footer .wrap{grid-template-columns:1fr}}
+
+/* дополнения для прихода Иосифа Оптинского */
+.upcoming{display:grid;border-top:1px solid var(--line)}
+.up{display:grid;grid-template-columns:6.5rem minmax(0,1fr);gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.up .d{font-family:var(--display);font-size:1.25rem;font-variant-numeric:tabular-nums}
+.up .d small{display:block;font-family:var(--body);font-size:.8rem;color:var(--muted)}
+.up .feast{color:var(--red);font-family:var(--display);font-size:1.15rem}
+.up .svc{color:var(--muted);font-size:.95rem}
+.up.big .feast{font-weight:700}
+.sched{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2rem,4vw,4rem)}
+@media (max-width:860px){.sched{grid-template-columns:1fr}}
+.more{margin-top:1rem;background:none;border:0;color:var(--red);font:500 .95rem var(--body);cursor:pointer;padding:0}
+.goal{background:var(--paper);border:1px solid var(--line);padding:clamp(1.2rem,3vw,2rem);display:grid;gap:1rem}
+.goal .nums{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem}
+.goal .nums b{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,4vw,2.4rem);font-variant-numeric:tabular-nums}
+.bar{height:10px;background:var(--band);border:1px solid var(--line)}
+.bar i{display:block;height:100%;background:var(--red)}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2rem}
+.way{background:var(--paper);padding:1.3rem;display:grid;gap:.3rem;min-width:0}
+.way b{font-weight:600;overflow-wrap:anywhere}
+@media (max-width:760px){.ways{grid-template-columns:1fr}}
+.plan{margin:0;padding:0;list-style:none;columns:2 13rem;column-gap:2rem}
+.plan li{padding:.45rem 0;border-bottom:1px solid var(--line);break-inside:avoid}
+.reqs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2rem,4vw,4rem)}
+@media (max-width:760px){.reqs{grid-template-columns:1fr}}
+.req{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.2rem 1rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.req h3{font-size:1.25rem}
+.req .sum{font-variant-numeric:tabular-nums;color:var(--red);font-weight:600;white-space:nowrap}
+.req p{grid-column:1/-1;color:var(--muted);font-size:.95rem}
+.relics{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1.2rem 2rem;margin-top:2rem}
+.relic{display:grid;gap:.2rem;padding-top:.8rem;border-top:1px solid var(--line)}
+.relic span{font-size:.88rem;color:var(--muted)}
+.bio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(2rem,4vw,4rem);margin-top:2.5rem}
+@media (max-width:860px){.bio{grid-template-columns:1fr}}
+.news{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem 2rem}
+@media (max-width:900px){.news{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.news{grid-template-columns:1fr}}
+.news article{display:grid;gap:.4rem;align-content:start;padding-top:1rem;border-top:1px solid var(--line)}
+.news time{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.news h3{font-size:1.2rem}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:1.5rem;flex-wrap:wrap}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:.7rem 1rem;font:500 1rem var(--body);color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--red);border-bottom-color:var(--red)}
+.lang{border:1px solid var(--line);padding:.3rem .5rem;font-size:.8rem;color:var(--muted);text-decoration:none;border-radius:2px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="На главную">
+      <svg viewBox="0 0 22 30" aria-hidden="true"><path d="M11 0v30M7 4h8M3 10h16M5 21l12 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+      Иосиф Оптинский
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#schedule">Расписание</a>
+      <a href="#notes">Записки и свечи</a>
+      <a href="#sacraments">Таинства</a>
+      <a href="#building">Строительство</a>
+      <a href="#parish">О приходе</a>
+      <a href="#news">Новости</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="btn" href="#donate">Пожертвовать</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Меню</button>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="rubric">Русская Православная Церковь Заграницей · Вирджиния</p>
+      <h1>Приход преподобного <em>Иосифа Оптинского</em></h1>
+      <p class="lead">Православная община Норфолка и Вирджиния-Бич с 1989 года. Вместе молятся выходцы из России, Белоруссии, Украины, Молдовы, Болгарии, Румынии и американцы, пришедшие в Православие.</p>
+      <div class="actions">
+        <a class="btn" href="#schedule">Расписание служб</a>
+        <a class="btn ghost" href="#notes">Подать записку</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 300 320">
+        <g fill="none" stroke="var(--ink)" stroke-width="1.4">
+          <path d="M150 4v44M142 12h16M134 22h32M140 38l20 5"/>
+          <path d="M150 56c-22 14-30 30-26 46h52c4-16-4-32-26-46z"/>
+          <path d="M128 102h44v34h-44z"/>
+          <path d="M116 136h68v14h-68z"/>
+          <path d="M66 162l84-12 84 12"/>
+          <path d="M60 162h180v138H60z"/>
+          <path d="M60 300V186H36v114M240 300V186h24v114"/>
+          <path d="M36 186c0-14 6-22 12-26 6 4 12 12 12 26M240 186c0-14 6-22 12-26 6 4 12 12 12 26"/>
+          <path d="M48 160v-14M44 150h8M252 160v-14M248 150h8"/>
+          <path d="M86 244c0-12 7-20 14-20s14 8 14 20v34H86zM186 244c0-12 7-20 14-20s14 8 14 20v34h-28z"/>
+          <path d="M134 300v-54c0-12 7-18 16-18s16 6 16 18v54"/>
+          <path d="M60 206h180M20 300h260"/>
+        </g>
+        <g fill="var(--red)" opacity=".85"><path d="M146 172h8v26h-8z"/><path d="M138 180h24v6h-24z"/></g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="cell"><span class="rubric">Суббота</span><b>16:00</b><span class="muted">акафист, вечерня, исповедь</span></div>
+    <div class="cell"><span class="rubric">Воскресенье</span><b>9:30</b><span class="muted">Божественная литургия</span></div>
+    <div class="cell"><span class="rubric">Телефон</span><b>(757) 390-2426</b><span class="muted">приход</span></div>
+    <div class="cell"><span class="rubric">Адрес</span><b>7220 Granby St.</b><span class="muted">Норфолк, Вирджиния</span></div>
+  </div>
+</div>
+
+<section id="schedule">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Расписание богослужений</p>
+      <h2>Каждую неделю</h2>
+      <p>Время местное, по Восточному побережью США. Исповедь в субботу вечером и в воскресенье перед литургией.</p>
+    </div>
+    <div class="sched">
+      <div>
+        <div class="week">
+          <div class="row"><span class="day">Суббота</span><span class="t">16:00</span><span>Акафист</span></div>
+          <div class="row"><span class="day">Суббота</span><span class="t">17:00</span><span>Вечернее богослужение</span></div>
+          <div class="row"><span class="day">Суббота</span><span class="t">17:45</span><span>Панихида</span></div>
+          <div class="row"><span class="day">Суббота</span><span class="t">18:00</span><span>Исповедь</span></div>
+          <div class="row"><span class="day">Воскресенье</span><span class="t">9:00</span><span>Часы, исповедь</span></div>
+          <div class="row"><span class="day">Воскресенье</span><span class="t">9:30</span><span>Божественная литургия<small>до 11:30</small></span></div>
+        </div>
+      </div>
+      <div>
+        <p class="rubric" style="margin-bottom:.8rem">Ближайшие праздники и службы</p>
+        <div class="upcoming" id="upcoming"></div>
+        <button class="more" id="moreBtn" type="button">Показать дальше</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="notes" class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Записки и свечи</p>
+      <h2>Если не можете прийти в храм</h2>
+      <p>Подайте записку, и её прочитают на ближайшем богослужении. Пишите имена только крещёных в Православной Церкви, в родительном падеже: Иоанна, Фотинии.</p>
+    </div>
+    <div class="notes">
+      <div class="prose">
+        <p><b>Поминовение на литургии.</b> На проскомидии священник вынимает из просфор частицы за живых и усопших, а в конце литургии погружает их в Святую Чашу с молитвой об омытии грехов поминаемых.</p>
+        <p><b>Молебен</b> — прошение к Господу, Богородице или святым о милости, или благодарение за полученные блага. <b>Панихида</b> — заупокойная служба о усопших.</p>
+        <p><b>Свеча.</b> Послушники поставят вашу свечу на ближайшей службе: малая $2, средняя $4, большая $7.</p>
+      </div>
+      <form class="card" id="noteForm" novalidate>
+        <div class="tabs" role="tablist" aria-label="Что заказать">
+          <button type="button" role="tab" id="tabLit" aria-selected="true" data-mode="lit">На литургии</button>
+          <button type="button" role="tab" id="tabMol" aria-selected="false" data-mode="mol">Молебен / панихида</button>
+          <button type="button" role="tab" id="tabCan" aria-selected="false" data-mode="can">Свеча</button>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="О ком" id="kindSeg">
+          <label><input type="radio" name="kind" id="kindHealth" value="О здравии" checked>О здравии</label>
+          <label><input type="radio" name="kind" id="kindRest" value="Об упокоении">Об упокоении</label>
+        </div>
+        <label for="noteType" id="typeLabel">Срок
+          <select id="noteType"></select>
+        </label>
+        <label for="noteNames" id="namesLabel">Имена
+          <textarea id="noteNames" placeholder="Иоанна, Марии, младенца Петра"></textarea>
+        </label>
+        <label for="noteFrom">Ваше имя и e-mail
+          <input id="noteFrom" placeholder="Анна, anna@example.com">
+        </label>
+        <div class="total"><span>Пожертвование</span><b id="noteSum">$0</b></div>
+        <button class="btn" type="submit">Подать</button>
+        <p class="result" id="noteResult" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="sacraments">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Таинства и требы</p>
+      <h2>Крещение, венчание, соборование</h2>
+      <p>Платы за таинства нет: суммы ниже — рекомендуемые пожертвования, жертвуйте по силам. Священник может приехать домой, в больницу, дом престарелых, похоронный дом или на кладбище в поминальные дни.</p>
+    </div>
+    <div class="reqs">
+      <div class="req"><h3>Крещение</h3><span class="sum">от $250</span><p>Трижды погружение в воду с призыванием Отца, и Сына, и Святого Духа.</p></div>
+      <div class="req"><h3>Венчание</h3><span class="sum">от $250</span><p>Бог даёт супругам, обещающим верность друг другу, благодать единодушия для христианской жизни.</p></div>
+      <div class="req"><h3>Соборование</h3><span class="sum">от $150</span><p>Помазание елеем с молитвой об исцелении немощей душевных и телесных. Можно пригласить священника домой или в больницу.</p></div>
+      <div class="req"><h3>Исповедь и причастие на дому</h3><span class="sum">от $150</span><p>Для тех, кто болен или не может прийти в храм.</p></div>
+      <div class="req"><h3>Отпевание</h3><span class="sum">от $250</span><p>Заупокойный чин, которым Церковь провожает усопшего в вечную жизнь. Священник может приехать в похоронный дом.</p></div>
+      <div class="req"><h3>Панихида, молебен</h3><span class="sum">от $25</span><p>Панихиду можно заказать и на кладбище в особые поминальные дни.</p></div>
+      <div class="req"><h3>Освящение дома или машины</h3><span class="sum">от $150</span><p>Священник приедет к вам.</p></div>
+      <div class="req"><h3>Как заказать</h3><span class="sum"></span><p>Позвоните отцу Сергию: <b>(757) 515-8442</b>, или напишите на frsergiy@russianchurchvb.org.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="building" class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Строительство</p>
+      <h2>Строим свой храм и просветительский центр</h2>
+      <p>В 2021 году приход купил участок земли в Чесапике. Там будут храм, трапезная, воскресная школа, библиотека и залы для бесед.</p>
+    </div>
+    <div class="history">
+      <div class="goal" aria-label="Сбор на первый этап">
+        <p class="rubric">Сбор на первый этап</p>
+        <div class="nums"><b>$81 802</b><span class="muted">из $134 000</span></div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="134000" aria-valuenow="81802"><i style="width:61%"></i></div>
+        <p class="muted">Собрано 61%. Осталось $52 197.</p>
+        <a class="btn" href="#donate">Помочь строительству</a>
+      </div>
+      <div>
+        <ol class="timeline">
+          <li><span class="y">2021</span><span>24 апреля приход приобрёл земельный участок.</span></li>
+          <li><span class="y">2022</span><span>17 августа утверждён проект Духовно-просветительского центра и план застройки.</span></li>
+          <li><span class="y">2023</span><span>Расширили въезд на участок, летом всем приходом строили гараж по выходным.</span></li>
+          <li><span class="y">Дальше</span><span>Часовня и центр: храм для богослужений и Таинств, трапезная, кухня, залы для лекций, воскресная школа, библиотека, музейный уголок.</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="donate">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Пожертвования</p>
+      <h2>Поддержать приход</h2>
+      <p>Приход живёт на пожертвования. Спаси Господи всех, кто помогает!</p>
+    </div>
+    <div class="ways">
+      <div class="way"><span class="rubric">PayPal</span><b>@stjosephofoptina</b><a href="https://www.paypal.com/giving/campaigns?campaign_id=HCCVV7HA4FDZ4" target="_blank" rel="noopener">Сбор на строительство →</a></div>
+      <div class="way"><span class="rubric">Venmo</span><b>@stjosephofoptina</b></div>
+      <div class="way"><span class="rubric">Чек</span><b>St. Joseph of Optina ROCOR</b><span class="muted">PO BOX 64476, Virginia Beach, VA 23467</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="parish" class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">О приходе</p>
+      <h2>Наша история</h2>
+    </div>
+    <div class="history">
+      <div class="prose">
+        <p class="initial">Приход основан в 1989 году. В 2007 году он вошёл в Русскую Православную Церковь Заграницей, в Восточно-Американскую епархию. Наша община многонациональная: здесь молятся вместе люди из России, Белоруссии, Украины, Молдовы, Болгарии, Румынии и американцы, обратившиеся в Православие.</p>
+        <p>Богослужения проходят в здании часовни святого Феодора на Granby Street в Норфолке.</p>
+        <p><a href="https://docs.google.com/forms/d/e/1FAIpQLScOUMHikhzwhrEk0bGC7sJvDSR0w7FkNeMdbfyEgAFl9AMn0Q/viewform" target="_blank" rel="noopener">Стать прихожанином →</a></p>
+      </div>
+      <div>
+        <p class="rubric">Святыни храма</p>
+        <div class="relics">
+          <div class="relic"><b>Сщмч. Иларион (Троицкий)</b><span>архиепископ Верейский</span></div>
+          <div class="relic"><b>Вмц. Ирина</b><span>память 5 мая</span></div>
+          <div class="relic"><b>Прп. исповедник Сергий (Сребрянский)</b><span>память 23 марта</span></div>
+          <div class="relic"><b>Свт. Феофан Затворник</b><span>память 23 января</span></div>
+          <div class="relic"><b>Свт. Тихон, Патриарх Московский</b><span>память 9 октября</span></div>
+        </div>
+        <p class="muted" style="margin-top:1rem;font-size:.9rem">В храме хранятся частицы мощей этих святых.</p>
+      </div>
+    </div>
+
+    <div class="bio" id="clergy">
+      <div class="prose">
+        <p class="rubric">Духовенство</p>
+        <h3>Иерей Сергий Косов</h3>
+        <p class="muted">Настоятель с 12 августа 2018 года</p>
+        <div class="people" style="margin-top:1rem">
+          <div class="person"><span class="role">Первоиерарх РПЦЗ</span><h3>Митрополит Николай</h3><span class="role">Восточно-Американский и Нью-Йоркский</span></div>
+          <div class="person"><span class="role">Предстоятель</span><h3>Патриарх Кирилл</h3><span class="role">Московский и всея Руси</span></div>
+        </div>
+      </div>
+      <ol class="timeline">
+        <li><span class="y">1982</span><span>Родился 25 июня в Москве, крещён в Успенском храме в Вешняках.</span></li>
+        <li><span class="y">1999–2004</span><span>Учился в Московском государственном педагогическом университете, затем служил в армии.</span></li>
+        <li><span class="y">2009</span><span>Начал церковную жизнь под руководством духовника, иеросхимонаха Феодосия (Елфимова).</span></li>
+        <li><span class="y">2012–2017</span><span>Свято-Троицкая семинария в Джорданвилле, бакалавр богословия.</span></li>
+        <li><span class="y">2016</span><span>29 мая рукоположён во диакона митрополитом Иларионом.</span></li>
+        <li><span class="y">2018</span><span>9 января рукоположён во иерея епископом Николаем, в августе назначен настоятелем.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Новости прихода</p>
+      <h2>Что у нас было</h2>
+    </div>
+    <div class="news">
+      <article><time datetime="2025-12-19">19 декабря 2025</time><h3>Рождественская ёлка для детей</h3><p class="muted">Приглашаем семьи с детьми встретить Рождество Христово вместе.</p></article>
+      <article><time datetime="2025-04-10">10 апреля 2025</time><h3>Празднование Светлого Христова Воскресения</h3><p class="muted">20 апреля в 14:00 на церковном участке в Чесапике.</p></article>
+      <article><time datetime="2025-01-24">24 января 2025</time><h3>Праздник Крещения Господня</h3><p class="muted">Спасибо всем, кто пришёл и помогал.</p></article>
+      <article><time datetime="2024-10-30">30 октября 2024</time><h3>Приходской пикник</h3><p class="muted">Семейный праздник на церковной земле. Спасибо добровольцам, подготовившим участок.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Контакты</p>
+      <h2>Как нас найти</h2>
+    </div>
+    <div class="contacts">
+      <div class="kv">
+        <div><span>Храм</span><b>7220 Granby St., Saint Theodore's Chapel Building, Norfolk, VA 23505</b></div>
+        <div><span>Почтовый адрес</span><b>PO BOX 64476, Virginia Beach, VA 23467</b></div>
+        <div><a class="btn ghost" href="https://maps.google.com/?q=7220+Granby+St,+Norfolk,+VA+23505" target="_blank" rel="noopener">Открыть на карте</a></div>
+      </div>
+      <div class="kv">
+        <div><span>Приход</span><b>(757) 390-2426<button class="copy" data-copy="+17573902426">копировать</button></b><b>info@russianchurchvb.org<button class="copy" data-copy="info@russianchurchvb.org">копировать</button></b></div>
+        <div><span>Настоятель, иерей Сергий Косов</span><b>(757) 515-8442<button class="copy" data-copy="+17575158442">копировать</button></b><b>frsergiy@russianchurchvb.org<button class="copy" data-copy="frsergiy@russianchurchvb.org">копировать</button></b></div>
+        <div><span>Мы в соцсетях</span><b><a href="https://www.facebook.com/VirginiaBeachROCOR/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/st.josephofoptina/" target="_blank" rel="noopener">Instagram</a></b></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Приход преподобного Иосифа Оптинского · St. Joseph of Optina Russian Orthodox Church<br>Восточно-Американская епархия Русской Православной Церкви Заграницей</p>
+    <div class="links"><a href="https://www.synod.com/" target="_blank" rel="noopener">РПЦЗ</a><a href="https://www.facebook.com/VirginiaBeachROCOR/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/st.josephofoptina/" target="_blank" rel="noopener">Instagram</a><a href="#top">Наверх</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
+  menuBtn.addEventListener('click',function(){var o=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o)});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}});
+
+  /* Праздники и особые службы. Обычные субботние и воскресные службы добавляются сами. */
+  var feasts=[
+    ['2026-10-18','Святителей Московских'],
+    ['2026-10-19','Апостола Фомы','12:30 служба'],
+    ['2026-10-20','Псково-Печерской иконы Божией Матери «Умиление»'],
+    ['2026-10-24','Собор преподобных Оптинских старцев',null,true],
+    ['2026-10-25','Иерусалимской и Калужской икон Божией Матери'],
+    ['2026-11-02','Прп. Гавриила Самтаврийского'],
+    ['2026-11-08','Вмч. Димитрия Солунского'],
+    ['2027-01-07','Рождество Христово',null,true],
+    ['2027-01-09','Апостола первомученика Стефана'],
+    ['2027-01-11','Мучеников 14 000 младенцев Вифлеемских'],
+    ['2027-01-14','Обрезание Господне'],
+    ['2027-01-15','Прп. Серафима Саровского']
+  ];
+  var map={};feasts.forEach(function(f){map[f[0]]=f});
+  var wd=['вс','пн','вт','ср','чт','пт','сб'],mn=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+  var items=[],d=new Date();d.setHours(0,0,0,0);
+  for(var i=0;i<120;i++){
+    var k=iso(d),dow=d.getDay(),f=map[k],svc=null;
+    if(dow===6)svc='16:00 акафист, вечерня, исповедь';
+    if(dow===0)svc='9:00 часы, исповедь · 9:30 литургия';
+    if(f&&f[2])svc=f[2];
+    if(f||svc)items.push({d:new Date(d),f:f,svc:svc});
+    d.setDate(d.getDate()+1);
+  }
+  var box=document.getElementById('upcoming'),shown=0,more=document.getElementById('moreBtn');
+  function render(n){
+    items.slice(shown,shown+n).forEach(function(it){
+      var el=document.createElement('div');el.className='up'+(it.f&&it.f[3]?' big':'');
+      el.innerHTML='<span class="d">'+it.d.getDate()+' '+mn[it.d.getMonth()].slice(0,3)+'<small>'+wd[it.d.getDay()]+'</small></span><span>'+(it.f?'<span class="feast">'+it.f[1]+'</span><br>':'')+'<span class="svc">'+(it.svc||'')+'</span></span>';
+      box.appendChild(el);
+    });
+    shown+=n;more.hidden=shown>=items.length;
+  }
+  render(7);more.addEventListener('click',function(){render(8)});
+
+  var modes={
+    lit:{label:'Срок',opts:[['неделя',4],['месяц',16],['полгода',96],['год',192]],names:true},
+    mol:{label:'Срок',opts:[['одна служба',25],['месяц',90],['полгода',500],['год',1000]],names:true},
+    can:{label:'Свеча',opts:[['малая',2],['средняя',4],['большая',7]],names:false}
+  };
+  var mode='lit',sel=document.getElementById('noteType'),names=document.getElementById('noteNames'),sum=document.getElementById('noteSum'),res=document.getElementById('noteResult'),form=document.getElementById('noteForm');
+  var tabs=form.querySelectorAll('[role=tab]');
+  function setMode(m){
+    mode=m;
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.mode===m)});
+    var c=modes[m];sel.innerHTML='';
+    c.opts.forEach(function(o,i){var op=document.createElement('option');op.value=i;op.textContent=o[0]+' · $'+o[1];sel.appendChild(op)});
+    document.getElementById('typeLabel').firstChild.textContent=c.label;
+    document.getElementById('namesLabel').firstChild.textContent=c.names?'Имена':'Ваши пожелания';
+    names.placeholder=c.names?'Иоанна, Марии, младенца Петра':'О чём помолиться';
+    document.getElementById('kindSeg').hidden=!c.names;
+    res.hidden=true;calc();
+  }
+  function calc(){var v=modes[mode].opts[sel.value][1];sum.textContent='$'+v;return v}
+  tabs.forEach(function(t){t.addEventListener('click',function(){setMode(t.dataset.mode)})});
+  form.addEventListener('change',function(){res.hidden=true;calc()});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!names.value.trim()){res.textContent=modes[mode].names?'Впишите хотя бы одно имя.':'Напишите, о чём помолиться.';res.hidden=false;names.focus();return}
+    res.textContent='Спасибо! Пожертвование $'+calc()+' можно отправить через PayPal или Venmo на @stjosephofoptina. Онлайн-оплату прямо на сайте подключим следующим шагом.';
+    res.hidden=false;
+  });
+  setMode('lit');
+
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var v=b.getAttribute('data-copy'),done=function(){b.textContent='скопировано';setTimeout(function(){b.textContent='копировать'},1500)};
+      try{navigator.clipboard.writeText(v).then(done,function(){})}catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>

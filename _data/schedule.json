@@ -1,0 +1,160 @@
+{
+  "saturday": {
+    "time": "16:00",
+    "ru": "акафист, вечерня, исповедь",
+    "en": "akathist, vespers, confession"
+  },
+  "sunday": {
+    "time": "9:30",
+    "ru": "Божественная литургия",
+    "en": "Divine Liturgy"
+  },
+  "week": [
+    {
+      "day": "sat",
+      "time": "16:00",
+      "ru": "Акафист",
+      "en": "Akathist",
+      "note_ru": "",
+      "note_en": ""
+    },
+    {
+      "day": "sat",
+      "time": "17:00",
+      "ru": "Вечернее богослужение",
+      "en": "Vespers",
+      "note_ru": "",
+      "note_en": ""
+    },
+    {
+      "day": "sat",
+      "time": "17:45",
+      "ru": "Панихида",
+      "en": "Panikhida (memorial service)",
+      "note_ru": "",
+      "note_en": ""
+    },
+    {
+      "day": "sat",
+      "time": "18:00",
+      "ru": "Исповедь",
+      "en": "Confession",
+      "note_ru": "",
+      "note_en": ""
+    },
+    {
+      "day": "sun",
+      "time": "9:00",
+      "ru": "Часы, исповедь",
+      "en": "Hours, confession",
+      "note_ru": "",
+      "note_en": ""
+    },
+    {
+      "day": "sun",
+      "time": "9:30",
+      "ru": "Божественная литургия",
+      "en": "Divine Liturgy",
+      "note_ru": "до 11:30",
+      "note_en": "until 11:30 am"
+    }
+  ],
+  "feasts": [
+    {
+      "date": "2026-10-18",
+      "ru": "Святителей Московских",
+      "en": "Holy Hierarchs of Moscow",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    },
+    {
+      "date": "2026-10-19",
+      "ru": "Апостола Фомы",
+      "en": "Holy Apostle Thomas",
+      "service_ru": "12:30 служба",
+      "service_en": "12:30 pm service",
+      "big": false
+    },
+    {
+      "date": "2026-10-20",
+      "ru": "Псково-Печерской иконы Божией Матери «Умиление»",
+      "en": "Pskov-Caves Icon of the Mother of God \"Tenderness\"",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    },
+    {
+      "date": "2026-10-24",
+      "ru": "Собор преподобных Оптинских старцев",
+      "en": "Synaxis of the Elders of Optina",
+      "service_ru": "",
+      "service_en": "",
+      "big": true
+    },
+    {
+      "date": "2026-10-25",
+      "ru": "Иерусалимской и Калужской икон Божией Матери",
+      "en": "Jerusalem and Kaluga Icons of the Mother of God",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    },
+    {
+      "date": "2026-11-02",
+      "ru": "Прп. Гавриила Самтаврийского",
+      "en": "St. Gabriel of Samtavro",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    },
+    {
+      "date": "2026-11-08",
+      "ru": "Вмч. Димитрия Солунского",
+      "en": "Great-martyr Demetrius of Thessalonica",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    },
+    {
+      "date": "2027-01-07",
+      "ru": "Рождество Христово",
+      "en": "Nativity of Christ",
+      "service_ru": "",
+      "service_en": "",
+      "big": true
+    },
+    {
+      "date": "2027-01-09",
+      "ru": "Апостола первомученика Стефана",
+      "en": "Holy Protomartyr Stephen",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    },
+    {
+      "date": "2027-01-11",
+      "ru": "Мучеников 14 000 младенцев Вифлеемских",
+      "en": "14,000 Holy Infants slain by Herod in Bethlehem",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    },
+    {
+      "date": "2027-01-14",
+      "ru": "Обрезание Господне",
+      "en": "Circumcision of the Lord",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    },
+    {
+      "date": "2027-01-15",
+      "ru": "Прп. Серафима Саровского",
+      "en": "St. Seraphim of Sarov",
+      "service_ru": "",
+      "service_en": "",
+      "big": false
+    }
+  ]
+}

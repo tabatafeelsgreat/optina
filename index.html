@@ -1,3 +1,6 @@
+---
+lang: ru
+---
 <!doctype html>
 <html lang="ru">
 <head>
@@ -13,6 +16,8 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+{%- assign notice = site.data.notice[page.lang] | strip -%}
+{% if site.data.notice.show and notice != "" %}<div class="alert" role="status"><div class="wrap">{{ notice }}</div></div>{% endif %}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="На главную">
@@ -40,7 +45,7 @@
     <div>
       <p class="rubric">Русская Православная Церковь Заграницей · Вирджиния</p>
       <h1>Приход преподобного <em>Иосифа Оптинского</em></h1>
-      <p class="lead">Православная община Норфолка и Вирджиния-Бич с 1989 года. Вместе молятся выходцы из России, Белоруссии, Украины, Молдовы, Болгарии, Румынии и американцы, пришедшие в Православие.</p>
+      <p class="lead">{{ site.data.texts.lead_ru }}</p>
       <div class="actions">
         <a class="btn" href="#schedule">Расписание служб</a>
         <a class="btn ghost" href="#notes">Подать записку</a>
@@ -55,9 +60,9 @@
 
 <div class="strip">
   <div class="wrap">
-    <div class="cell"><span class="rubric">Суббота</span><b>16:00</b><span class="muted">акафист, вечерня, исповедь</span></div>
-    <div class="cell"><span class="rubric">Воскресенье</span><b>9:30</b><span class="muted">Божественная литургия</span></div>
-    <div class="cell"><span class="rubric">Телефон</span><b>(757) 390-2426</b><span class="muted">приход</span></div>
+    <div class="cell"><span class="rubric">{% include day.html d="sat" %}</span><b>{% include time.html t=site.data.schedule.saturday.time %}</b><span class="muted">{{ site.data.schedule.saturday[page.lang] }}</span></div>
+    <div class="cell"><span class="rubric">{% include day.html d="sun" %}</span><b>{% include time.html t=site.data.schedule.sunday.time %}</b><span class="muted">{{ site.data.schedule.sunday[page.lang] }}</span></div>
+    <div class="cell"><span class="rubric">Телефон</span><b>{{ site.data.contacts.phone }}</b><span class="muted">приход</span></div>
     <div class="cell"><span class="rubric">Адрес</span><b>7220 Granby St.</b><span class="muted">Норфолк, Вирджиния</span></div>
   </div>
 </div>
@@ -72,12 +77,9 @@
     <div class="sched">
       <div>
         <div class="week">
-          <div class="row"><span class="day">Суббота</span><span class="t">16:00</span><span>Акафист</span></div>
-          <div class="row"><span class="day">Суббота</span><span class="t">17:00</span><span>Вечернее богослужение</span></div>
-          <div class="row"><span class="day">Суббота</span><span class="t">17:45</span><span>Панихида</span></div>
-          <div class="row"><span class="day">Суббота</span><span class="t">18:00</span><span>Исповедь</span></div>
-          <div class="row"><span class="day">Воскресенье</span><span class="t">9:00</span><span>Часы, исповедь</span></div>
-          <div class="row"><span class="day">Воскресенье</span><span class="t">9:30</span><span>Божественная литургия<small>до 11:30</small></span></div>
+{%- for r in site.data.schedule.week %}
+          <div class="row"><span class="day">{% include day.html d=r.day %}</span><span class="t">{% include time.html t=r.time %}</span><span>{{ r[page.lang] }}{% assign nk = "note_" | append: page.lang %}{% if r[nk] != "" and r[nk] %}<small>{{ r[nk] }}</small>{% endif %}</span></div>
+{%- endfor %}
         </div>
       </div>
       <div>
@@ -144,7 +146,7 @@
       <div class="req"><h3>Отпевание</h3><span class="sum">от $250</span><p>Заупокойный чин, которым Церковь провожает усопшего в вечную жизнь. Священник может приехать в похоронный дом.</p></div>
       <div class="req"><h3>Панихида, молебен</h3><span class="sum">от $25</span><p>Панихиду можно заказать и на кладбище в особые поминальные дни.</p></div>
       <div class="req"><h3>Освящение дома или машины</h3><span class="sum">от $150</span><p>Священник приедет к вам.</p></div>
-      <div class="req"><h3>Как заказать</h3><span class="sum"></span><p>Позвоните отцу Сергию: <b>(757) 515-8442</b>, или напишите на frsergiy@russianchurchvb.org.</p></div>
+      <div class="req"><h3>Как заказать</h3><span class="sum"></span><p>Позвоните отцу Сергию: <b>{{ site.data.contacts.priest_phone }}</b>, или напишите на {{ site.data.contacts.priest_email }}.</p></div>
     </div>
   </div>
 </section>
@@ -157,11 +159,10 @@
       <p>В 2021 году приход купил участок земли в Чесапике, 3617 S. Battlefield Blvd. Там будут храм, трапезная, воскресная школа, библиотека и залы для бесед.</p>
     </div>
     <div class="history">
-      <!-- Сбор: чтобы обновить счётчик, поменяйте числа в data-raised (собрано) и data-goal (цель) -->
-      <div class="goal" id="fund" data-raised="81802" data-goal="1500000" aria-label="Сбор на строительство храма">
+      <div class="goal" id="fund" data-raised="{{ site.data.fund.raised }}" data-goal="{{ site.data.fund.goal }}" aria-label="Сбор на строительство храма">
         <p class="rubric">Сбор на строительство храма</p>
         <div class="nums"><b id="fundRaised">$81 802</b><span class="muted" id="fundGoal">из $1 500 000</span></div>
-        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="1500000" aria-valuenow="81802"><i id="fundBar" style="width:5%"></i></div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="{{ site.data.fund.goal }}" aria-valuenow="{{ site.data.fund.raised }}"><i id="fundBar" style="width:5%"></i></div>
         <p class="muted" id="fundNote">Собрано 5%. Осталось $1 418 198.</p>
         <div style="display:flex;flex-wrap:wrap;gap:.6rem"><a class="btn" href="https://www.paypal.com/giving/campaigns?campaign_id=HCCVV7HA4FDZ4" target="_blank" rel="noopener">Пожертвовать через PayPal</a><a class="btn ghost" href="#donate">Другие способы</a></div>
       </div>
@@ -204,7 +205,7 @@
     </div>
     <div class="history">
       <div class="prose">
-        <p class="initial">Приход основан в 1989 году. В 2007 году он вошёл в Русскую Православную Церковь Заграницей, в Восточно-Американскую епархию. Тогда же приход стал именоваться в честь преподобного Иосифа Оптинского. Наша община многонациональная: здесь молятся вместе люди из России, Белоруссии, Украины, Молдовы, Болгарии, Румынии и американцы, обратившиеся в Православие.</p>
+        <div class="about-intro">{{ site.data.texts.about_ru }}</div>
         <aside class="patron">
           <div class="patron-imgs">
             <figure><img src="img/st-joseph-icon.jpg" alt="Икона преподобного Иосифа" loading="lazy" width="446" height="600"><figcaption>Икона преподобного Иосифа</figcaption></figure>
@@ -260,13 +261,30 @@
       <h2>Что у нас было</h2>
     </div>
     <div class="news">
-      <article><time datetime="2025-12-19">19 декабря 2025</time><h3>Рождественская ёлка для детей</h3><p class="muted">Приглашаем семьи с детьми встретить Рождество Христово вместе.</p></article>
-      <article><time datetime="2025-04-10">10 апреля 2025</time><h3>Празднование Светлого Христова Воскресения</h3><p class="muted">20 апреля в 14:00 на церковном участке в Чесапике.</p></article>
-      <article><time datetime="2025-01-24">24 января 2025</time><h3>Праздник Крещения Господня</h3><p class="muted">Спасибо всем, кто пришёл и помогал.</p></article>
-      <article><time datetime="2024-10-30">30 октября 2024</time><h3>Приходской пикник</h3><p class="muted">Семейный праздник на церковной земле. Спасибо добровольцам, подготовившим участок.</p></article>
+{%- assign months = "января,февраля,марта,апреля,мая,июня,июля,августа,сентября,октября,ноября,декабря" | split: "," -%}
+{%- assign items = site.news | sort: "date" | reverse -%}
+{%- for n in items limit: 8 %}
+      <article>{% if n.image and n.image != "" %}<img src="{{ n.image | relative_url }}" alt="" loading="lazy">{% endif %}<time datetime="{{ n.date | date: "%Y-%m-%d" }}">{%- assign mi = n.date | date: "%-m" | minus: 1 -%}{{ n.date | date: "%-d" }} {{ months[mi] }} {{ n.date | date: "%Y" }}</time><h3>{{ n.title }}</h3><div class="news-body muted">{{ n.content | markdownify }}</div><button class="more-text" type="button" hidden>Читать дальше</button></article>
+{%- endfor %}
     </div>
   </div>
 </section>
+
+{% if site.data.gallery.photos.size > 0 %}
+<section id="gallery" class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Фотогалерея</p>
+      <h2>Жизнь прихода</h2>
+    </div>
+    <div class="gallery">
+{%- for p in site.data.gallery.photos %}{% assign ck = "caption_" | append: page.lang %}
+      <figure><a href="{{ p.image | relative_url }}" target="_blank" rel="noopener"><img src="{{ p.image | relative_url }}" alt="{{ p[ck] | escape }}" loading="lazy"></a>{% if p[ck] != "" and p[ck] %}<figcaption>{{ p[ck] }}</figcaption>{% endif %}</figure>
+{%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 <section id="social">
   <div class="wrap">
@@ -302,8 +320,8 @@
         <div><a class="btn ghost" href="https://maps.google.com/?q=7220+Granby+St,+Norfolk,+VA+23505" target="_blank" rel="noopener">Открыть на карте</a></div>
       </div>
       <div class="kv">
-        <div><span>Приход</span><b>(757) 390-2426<button class="copy" data-copy="+17573902426">копировать</button></b><b>info@russianchurchvb.org<button class="copy" data-copy="info@russianchurchvb.org">копировать</button></b></div>
-        <div><span>Настоятель, иерей Сергий Косов</span><b>(757) 515-8442<button class="copy" data-copy="+17575158442">копировать</button></b><b>frsergiy@russianchurchvb.org<button class="copy" data-copy="frsergiy@russianchurchvb.org">копировать</button></b></div>
+        <div><span>Приход</span><b>{{ site.data.contacts.phone }}<button class="copy" data-copy="{{ site.data.contacts.phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">копировать</button></b><b>{{ site.data.contacts.email }}<button class="copy" data-copy="{{ site.data.contacts.email }}">копировать</button></b></div>
+        <div><span>Настоятель, иерей Сергий Косов</span><b>{{ site.data.contacts.priest_phone }}<button class="copy" data-copy="{{ site.data.contacts.priest_phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">копировать</button></b><b>{{ site.data.contacts.priest_email }}<button class="copy" data-copy="{{ site.data.contacts.priest_email }}">копировать</button></b></div>
         <div><span>Мы в соцсетях</span><b><a href="https://www.facebook.com/VirginiaBeachROCOR/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/st.josephofoptina/" target="_blank" rel="noopener">Instagram</a></b></div>
       </div>
     </div>
@@ -325,37 +343,24 @@
   nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}});
 
   /* Праздники и особые службы. Обычные субботние и воскресные службы добавляются сами. */
-  var feasts=[
-    ['2026-10-18','Святителей Московских'],
-    ['2026-10-19','Апостола Фомы','12:30 служба'],
-    ['2026-10-20','Псково-Печерской иконы Божией Матери «Умиление»'],
-    ['2026-10-24','Собор преподобных Оптинских старцев',null,true],
-    ['2026-10-25','Иерусалимской и Калужской икон Божией Матери'],
-    ['2026-11-02','Прп. Гавриила Самтаврийского'],
-    ['2026-11-08','Вмч. Димитрия Солунского'],
-    ['2027-01-07','Рождество Христово',null,true],
-    ['2027-01-09','Апостола первомученика Стефана'],
-    ['2027-01-11','Мучеников 14 000 младенцев Вифлеемских'],
-    ['2027-01-14','Обрезание Господне'],
-    ['2027-01-15','Прп. Серафима Саровского']
-  ];
-  var map={};feasts.forEach(function(f){map[f[0]]=f});
+  var feasts={{ site.data.schedule.feasts | jsonify }};
+  var map={};feasts.forEach(function(f){map[String(f.date).slice(0,10)]=f});
   var wd=['вс','пн','вт','ср','чт','пт','сб'],mn=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
   function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
   var items=[],d=new Date();d.setHours(0,0,0,0);
   for(var i=0;i<120;i++){
     var k=iso(d),dow=d.getDay(),f=map[k],svc=null;
-    if(dow===6)svc='16:00 акафист, вечерня, исповедь';
-    if(dow===0)svc='9:00 часы, исповедь · 9:30 литургия';
-    if(f&&f[2])svc=f[2];
+    {% capture t %}{% include time.html t=site.data.schedule.saturday.time %} {{ site.data.schedule.saturday[page.lang] }}{% endcapture %}if(dow===6)svc={{ t | strip | jsonify }};
+    {% capture t %}{% include time.html t=site.data.schedule.sunday.time %} {{ site.data.schedule.sunday[page.lang] }}{% endcapture %}if(dow===0)svc={{ t | strip | jsonify }};
+    if(f&&f.service_ru)svc=f.service_ru;
     if(f||svc)items.push({d:new Date(d),f:f,svc:svc});
     d.setDate(d.getDate()+1);
   }
   var box=document.getElementById('upcoming'),shown=0,more=document.getElementById('moreBtn');
   function render(n){
     items.slice(shown,shown+n).forEach(function(it){
-      var el=document.createElement('div');el.className='up'+(it.f&&it.f[3]?' big':'');
-      el.innerHTML='<span class="d">'+it.d.getDate()+' '+mn[it.d.getMonth()].slice(0,3)+'<small>'+wd[it.d.getDay()]+'</small></span><span>'+(it.f?'<span class="feast">'+it.f[1]+'</span><br>':'')+'<span class="svc">'+(it.svc||'')+'</span></span>';
+      var el=document.createElement('div');el.className='up'+(it.f&&it.f.big?' big':'');
+      el.innerHTML='<span class="d">'+it.d.getDate()+' '+mn[it.d.getMonth()].slice(0,3)+'<small>'+wd[it.d.getDay()]+'</small></span><span>'+(it.f?'<span class="feast">'+it.f.ru+'</span><br>':'')+'<span class="svc">'+(it.svc||'')+'</span></span>';
       box.appendChild(el);
     });
     shown+=n;more.hidden=shown>=items.length;
@@ -404,7 +409,7 @@
         res.innerHTML='Спасибо, записка отправлена отцу Сергию. Теперь можно сделать пожертвование:<br><a class="btn" style="margin-top:.7rem" target="_blank" rel="noopener" href="https://www.paypal.com/paypalme/stjosephofoptina/'+amount+'USD">Пожертвовать через PayPal $'+amount+'</a>';
         names.value='';
       })
-      .catch(function(e){res.textContent=e&&e.act?'Форма ещё не подтверждена: на почту frsergiy@russianchurchvb.org пришло письмо от FormSubmit, нажмите в нём Activate Form и отправьте записку ещё раз.':(e&&e.name==='AbortError'?'Сервер не ответил. Попробуйте ещё раз через минуту или позвоните: (757) 515-8442.':'Не получилось отправить записку. Попробуйте ещё раз или позвоните: (757) 515-8442.')})
+      .catch(function(e){res.textContent=e&&e.act?'Форма ещё не подтверждена: на почту frsergiy@russianchurchvb.org пришло письмо от FormSubmit, нажмите в нём Activate Form и отправьте записку ещё раз.':(e&&e.name==='AbortError'?'Сервер не ответил. Попробуйте ещё раз через минуту или позвоните: {{ site.data.contacts.priest_phone }}.':'Не получилось отправить записку. Попробуйте ещё раз или позвоните: {{ site.data.contacts.priest_phone }}.')})
       .then(function(){clearTimeout(tm);btn.disabled=false});
   });
   setMode('lit');
@@ -421,6 +426,7 @@
     f.querySelector('[role=progressbar]').setAttribute('aria-valuenow',r);
     document.getElementById('fundNote').textContent='Собрано '+(pct<10?pct.toFixed(1).replace('.',','):Math.round(pct))+'%. Осталось '+m(Math.max(g-r,0))+'.';
   })();
+  document.querySelectorAll('.news article').forEach(function(a){var b=a.querySelector('.news-body'),btn=a.querySelector('.more-text');if(b&&btn&&b.scrollHeight>b.clientHeight+4){btn.hidden=false;btn.addEventListener('click',function(){a.classList.add('open');btn.hidden=true})}});
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
       var v=b.getAttribute('data-copy'),done=function(){b.textContent='скопировано';setTimeout(function(){b.textContent='копировать'},1500)};

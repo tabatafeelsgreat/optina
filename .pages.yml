@@ -1,0 +1,167 @@
+# Админка сайта: https://app.pagescms.org (вход через GitHub, репозиторий optina)
+media:
+  input: img/uploads
+  output: /img/uploads
+
+content:
+  - name: news
+    label: Новости
+    type: collection
+    path: _news
+    filename: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Заголовок (по-русски)
+        type: string
+        required: true
+      - name: title_en
+        label: Заголовок (по-английски, можно оставить пустым)
+        type: string
+      - name: date
+        label: Дата
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: image
+        label: Фотография
+        type: image
+      - name: body
+        label: Текст (по-русски)
+        type: rich-text
+      - name: body_en
+        label: Текст (по-английски, можно оставить пустым)
+        type: rich-text
+
+  - name: notice
+    label: Срочное объявление
+    type: file
+    path: _data/notice.json
+    format: json
+    fields:
+      - name: show
+        label: Показывать объявление вверху сайта
+        type: boolean
+      - name: ru
+        label: Текст (по-русски)
+        type: string
+      - name: en
+        label: Текст (по-английски)
+        type: string
+
+  - name: fund
+    label: Сбор на храм
+    type: file
+    path: _data/fund.json
+    format: json
+    fields:
+      - name: raised
+        label: Собрано, $
+        type: number
+        required: true
+      - name: goal
+        label: Цель, $
+        type: number
+        required: true
+
+  - name: schedule
+    label: Расписание и праздники
+    type: file
+    path: _data/schedule.json
+    format: json
+    fields:
+      - name: saturday
+        label: Суббота коротко (для полосы вверху и списка ближайших служб)
+        type: object
+        fields:
+          - { name: time, label: "Время (например 16:00)", type: string }
+          - { name: ru, label: "Что (по-русски)", type: string }
+          - { name: en, label: "Что (по-английски)", type: string }
+      - name: sunday
+        label: Воскресенье коротко
+        type: object
+        fields:
+          - { name: time, label: "Время (например 9:30)", type: string }
+          - { name: ru, label: "Что (по-русски)", type: string }
+          - { name: en, label: "Что (по-английски)", type: string }
+      - name: week
+        label: Расписание на каждую неделю
+        type: object
+        list: true
+        fields:
+          - name: day
+            label: День
+            type: select
+            options:
+              values:
+                - { name: mon, label: Понедельник }
+                - { name: tue, label: Вторник }
+                - { name: wed, label: Среда }
+                - { name: thu, label: Четверг }
+                - { name: fri, label: Пятница }
+                - { name: sat, label: Суббота }
+                - { name: sun, label: Воскресенье }
+          - { name: time, label: "Время (24 часа, например 17:00)", type: string }
+          - { name: ru, label: "Служба (по-русски)", type: string }
+          - { name: en, label: "Служба (по-английски)", type: string }
+          - { name: note_ru, label: "Примечание (по-русски)", type: string }
+          - { name: note_en, label: "Примечание (по-английски)", type: string }
+      - name: feasts
+        label: Праздники и особые службы
+        type: object
+        list: true
+        fields:
+          - name: date
+            label: Дата
+            type: date
+            options:
+              format: yyyy-MM-dd
+          - { name: ru, label: "Праздник (по-русски)", type: string }
+          - { name: en, label: "Праздник (по-английски)", type: string }
+          - { name: service_ru, label: "Служба, если не обычная (по-русски)", type: string }
+          - { name: service_en, label: "Служба, если не обычная (по-английски)", type: string }
+          - { name: big, label: "Великий праздник (выделить)", type: boolean }
+
+  - name: gallery
+    label: Фотогалерея
+    type: file
+    path: _data/gallery.json
+    format: json
+    fields:
+      - name: photos
+        label: Фотографии
+        type: object
+        list: true
+        fields:
+          - { name: image, label: Фото, type: image }
+          - { name: caption_ru, label: "Подпись (по-русски)", type: string }
+          - { name: caption_en, label: "Подпись (по-английски)", type: string }
+
+  - name: texts
+    label: Тексты
+    type: file
+    path: _data/texts.json
+    format: json
+    fields:
+      - { name: lead_ru, label: "Приветствие вверху (по-русски)", type: text }
+      - { name: lead_en, label: "Приветствие вверху (по-английски)", type: text }
+      - { name: about_ru, label: "О приходе (по-русски)", type: rich-text }
+      - { name: about_en, label: "О приходе (по-английски)", type: rich-text }
+
+  - name: contacts
+    label: Контакты
+    type: file
+    path: _data/contacts.json
+    format: json
+    fields:
+      - { name: phone, label: Телефон прихода, type: string }
+      - { name: email, label: Почта прихода, type: string }
+      - { name: priest_phone, label: Телефон настоятеля, type: string }
+      - { name: priest_email, label: Почта настоятеля, type: string }

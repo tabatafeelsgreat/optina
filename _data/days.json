@@ -1,0 +1,9 @@
+{
+  "mon": {"ru": "Понедельник", "en": "Monday"},
+  "tue": {"ru": "Вторник", "en": "Tuesday"},
+  "wed": {"ru": "Среда", "en": "Wednesday"},
+  "thu": {"ru": "Четверг", "en": "Thursday"},
+  "fri": {"ru": "Пятница", "en": "Friday"},
+  "sat": {"ru": "Суббота", "en": "Saturday"},
+  "sun": {"ru": "Воскресенье", "en": "Sunday"}
+}

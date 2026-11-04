@@ -83,7 +83,7 @@ section{padding-block:clamp(3rem,8vw,6rem)}
 .history{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,4.5rem)}
 @media (max-width:860px){.history{grid-template-columns:1fr}}
 .prose{max-width:var(--text);display:grid;gap:1rem}
-.prose .initial::first-letter{float:left;font-family:var(--display);color:var(--red);font-size:4.2em;line-height:.8;padding:.08em .1em 0 0}
+.prose .initial::first-letter,.about-intro>p:first-child::first-letter{float:left;font-family:var(--display);color:var(--red);font-size:4.2em;line-height:.8;padding:.08em .1em 0 0}
 .timeline{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
 .timeline li{position:relative;padding:0 0 1.5rem 1.6rem;display:grid;gap:.25rem}
 .timeline li::before{content:"";position:absolute;left:-5px;top:.55rem;width:9px;height:9px;background:var(--bg);border:1px solid var(--red);transform:rotate(45deg)}
@@ -228,3 +228,18 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .patron figcaption{font-size:.78rem;color:var(--muted);margin-top:.3rem;line-height:1.3}
 .patron h3{font-size:1.5rem}
 @media (max-width:520px){.patron{grid-template-columns:1fr}.patron>*,.patron .patron-imgs{grid-column:1;grid-row:auto}.patron-imgs{flex-direction:row;width:100%}.patron-imgs figure{flex:1}}
+.about-intro>p{margin:0 0 1em}
+.alert{background:var(--red);color:var(--bg);font-size:.95rem;padding:.6rem 0;text-align:center}
+.alert a{color:inherit;text-decoration:underline}
+.news{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.news{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.news{grid-template-columns:1fr}}
+.news img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:1px solid var(--line);margin-bottom:.3rem}
+.news-body{max-height:7.8em;overflow:hidden}
+.news-body p{margin:0 0 .5em}
+.news article.open .news-body{max-height:none}
+.more-text{justify-self:start;background:none;border:0;padding:0;color:var(--red);font:inherit;font-size:.9rem;cursor:pointer}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.gallery figure{margin:0}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:1px solid var(--line)}
+.gallery figcaption{font-size:.85rem;color:var(--muted);margin-top:.35rem}

@@ -1,0 +1,6 @@
+# Настройки сборки сайта. Содержимое меняется в админке (app.pagescms.org), не здесь.
+title: St. Joseph of Optina
+exclude: [README.md]
+collections:
+  news:
+    output: false

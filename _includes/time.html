@@ -1,0 +1,7 @@
+{%- assign hm = include.t | split: ':' -%}
+{%- if page.lang == 'en' and hm.size == 2 -%}
+{%- assign h = hm[0] | plus: 0 -%}
+{%- if h >= 12 %}{% assign ap = 'pm' %}{% else %}{% assign ap = 'am' %}{% endif -%}
+{%- assign h12 = h | modulo: 12 -%}{%- if h12 == 0 %}{% assign h12 = 12 %}{% endif -%}
+{{ h12 }}:{{ hm[1] }} {{ ap }}
+{%- else -%}{{ include.t }}{%- endif -%}

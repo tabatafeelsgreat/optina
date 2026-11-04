@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Приход Иосифа Оптинского</title>
 <meta name="description" content="Русская православная церковь преподобного Иосифа Оптинского (РПЦЗ), Норфолк и Вирджиния-Бич. Расписание служб, записки, таинства, строительство храма.">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Golos+Text:wght@400;500;600&display=swap">
@@ -43,7 +44,7 @@ p{margin:0}
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:1rem;min-height:3.6rem}
 .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--ink);font-family:var(--display);font-size:1.25rem;white-space:nowrap}
-.brand svg{width:22px;height:30px;flex:none}
+.brand svg{width:40px;height:33px;flex:none}
 .nav{display:flex;gap:1.2rem;margin-left:auto;font-size:.92rem}
 .nav a{color:var(--ink);text-decoration:none}
 .nav a:hover{color:var(--red)}
@@ -66,9 +67,15 @@ p{margin:0}
 .hero h1 em{font-style:italic;color:var(--red)}
 .hero .lead{margin-top:1.4rem;max-width:var(--text);font-size:1.15rem;color:var(--muted)}
 .hero .actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
-.hero-art{justify-self:center;width:min(100%,300px)}
-.hero-art svg{width:100%;height:auto;display:block}
-@media (max-width:760px){.hero .wrap{grid-template-columns:1fr}.hero-art{width:min(70%,240px);order:-1}}
+.hero .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.hero-art{margin:0;display:grid;gap:.5rem}
+.hero-art img{width:100%;height:auto;aspect-ratio:1464/988;object-fit:cover;display:block;border:1px solid var(--line)}
+figcaption{font-size:.85rem;color:var(--muted)}
+@media (max-width:760px){.hero .wrap{grid-template-columns:1fr}.hero-art{order:-1}}
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1rem,3vw,2rem);margin-top:clamp(2rem,4vw,3rem)}
+.shots figure{margin:0;display:grid;gap:.5rem}
+.shots img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block;border:1px solid var(--line)}
+@media (max-width:640px){.shots{grid-template-columns:1fr}}
 
 /* today strip */
 .strip{border-block:1px solid var(--line);background:var(--paper)}
@@ -220,7 +227,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="На главную">
-      <svg viewBox="0 0 22 30" aria-hidden="true"><path d="M11 0v30M7 4h8M3 10h16M5 21l12 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+      <svg viewBox="620 1000 4560 3760" aria-hidden="true"><path fill="currentColor" d="M3440.36 1164.8c0,0 21.3,80.1 -23.38,140.92 -44.68,60.82 -87.92,59.84 -155.66,146.27 -57.88,73.85 -76.72,136.7 -80.99,153.44l0 1730.06 -184.11 162.59 184.11 -15.17 0 323.76c0,262.18 2.61,446.07 -84.14,588.97 -103.92,171.21 -314.05,343.67 -619.79,333.01 -305.75,-10.67 -452.71,-189.61 -498.91,-350.78 -113.5,-395.77 286.19,-612.73 330.46,-627.99 0,0 -204.55,135.59 -208.55,338.73 -6.78,343.44 331.06,628.03 638.9,442.13 182.49,-110.2 214.63,-380.5 214.63,-380.5l0.04 -2554.23c-4.79,-13.04 -20.8,-7.12 -20.72,0.15 0.13,11.38 3.21,2247.42 0,2502.53 -3.2,255.1 -166.91,382.03 -166.91,382.03 0,0 18.55,-34.93 32.76,-94.98 14.19,-60.04 13.05,-119.85 13.05,-119.85 0,0 0,-2332.27 0,-2445.9 0,-58.55 -10.51,-132.91 -37.35,-215.03 -14.53,-44.44 -43.17,-98.85 -75.98,-153.04 -67.71,-86.38 -110.94,-85.41 -155.61,-146.21 -44.68,-60.81 -23.38,-140.92 -23.38,-140.92 12.23,128.72 933.17,135.98 921.52,0z M2986.27 1061c230.33,0 417.05,36.36 417.05,81.2 0,44.85 -186.72,81.2 -417.05,81.2 -230.33,0 -417.04,-36.35 -417.04,-81.2 0,-44.84 186.71,-81.2 417.04,-81.2z M4202.78 2488.38c9.25,18.89 148.06,139.46 161.19,343.1 -104.69,-8.96 -238.83,-63.81 -310.29,-133.22 -12.41,-12.06 -14.71,-18.2 -32.34,-26.99l0.06 446.68c46.69,-26.2 148.57,-148.79 343,-159.04 -7.37,70.36 -29.01,141.37 -56.8,196.73 -42.28,84.24 -73.26,100.41 -104.56,146.48l448.81 -0.28c-13.66,-27.26 -142.07,-129.73 -160.63,-343.14 207.44,15.03 317.14,147.28 343.35,160.45 1.44,-143.57 3.45,-310.03 -1.4,-448.43 -57.98,45.46 -65.12,63.68 -145.31,104.08 -54.63,27.52 -126.15,50.41 -196.01,56.76 2.29,-65.88 30.67,-145.31 56.34,-196.45 44.47,-88.59 78.86,-107.03 103.62,-147.14l-449.04 0.41z M1135.31 2488.38c9.25,18.89 148.06,139.46 161.19,343.1 -104.69,-8.96 -238.83,-63.81 -310.29,-133.22 -12.41,-12.06 -14.71,-18.2 -32.34,-26.99l0.06 446.68c46.69,-26.2 148.57,-148.79 343,-159.04 -7.37,70.36 -29.01,141.37 -56.8,196.73 -42.28,84.24 -73.26,100.41 -104.56,146.48l448.81 -0.28c-13.66,-27.26 -142.07,-129.73 -160.63,-343.14 207.44,15.03 317.14,147.28 343.35,160.45 1.44,-143.57 3.45,-310.03 -1.4,-448.43 -57.98,45.46 -65.12,63.68 -145.31,104.08 -54.63,27.52 -126.15,50.41 -196.01,56.76 2.29,-65.88 30.67,-145.31 56.34,-196.45 44.47,-88.59 78.86,-107.03 103.62,-147.14l-449.04 0.41z"/></svg>
       Иосиф Оптинский
     </a>
     <nav class="nav" id="nav">
@@ -249,25 +256,10 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
         <a class="btn ghost" href="#notes">Подать записку</a>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 300 320">
-        <g fill="none" stroke="var(--ink)" stroke-width="1.4">
-          <path d="M150 4v44M142 12h16M134 22h32M140 38l20 5"/>
-          <path d="M150 56c-22 14-30 30-26 46h52c4-16-4-32-26-46z"/>
-          <path d="M128 102h44v34h-44z"/>
-          <path d="M116 136h68v14h-68z"/>
-          <path d="M66 162l84-12 84 12"/>
-          <path d="M60 162h180v138H60z"/>
-          <path d="M60 300V186H36v114M240 300V186h24v114"/>
-          <path d="M36 186c0-14 6-22 12-26 6 4 12 12 12 26M240 186c0-14 6-22 12-26 6 4 12 12 12 26"/>
-          <path d="M48 160v-14M44 150h8M252 160v-14M248 150h8"/>
-          <path d="M86 244c0-12 7-20 14-20s14 8 14 20v34H86zM186 244c0-12 7-20 14-20s14 8 14 20v34h-28z"/>
-          <path d="M134 300v-54c0-12 7-18 16-18s16 6 16 18v54"/>
-          <path d="M60 206h180M20 300h260"/>
-        </g>
-        <g fill="var(--red)" opacity=".85"><path d="M146 172h8v26h-8z"/><path d="M138 180h24v6h-24z"/></g>
-      </svg>
-    </div>
+    <figure class="hero-art">
+      <img src="img/church-front.jpg" width="1464" height="988" alt="Проект нового храма преподобного Иосифа Оптинского: белый храм с золотым куполом и звонницей">
+      <figcaption>Так будет выглядеть наш храм в Чесапике</figcaption>
+    </figure>
   </div>
 </div>
 
@@ -372,7 +364,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
     <div class="head">
       <p class="rubric">Строительство</p>
       <h2>Строим свой храм и просветительский центр</h2>
-      <p>В 2021 году приход купил участок земли в Чесапике. Там будут храм, трапезная, воскресная школа, библиотека и залы для бесед.</p>
+      <p>В 2021 году приход купил участок земли в Чесапике, 3617 S. Battlefield Blvd. Там будут храм, трапезная, воскресная школа, библиотека и залы для бесед.</p>
     </div>
     <div class="history">
       <!-- Сбор: чтобы обновить счётчик, поменяйте числа в data-raised (собрано) и data-goal (цель) -->
@@ -381,7 +373,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
         <div class="nums"><b id="fundRaised">$81 802</b><span class="muted" id="fundGoal">из $1 500 000</span></div>
         <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="1500000" aria-valuenow="81802"><i id="fundBar" style="width:5%"></i></div>
         <p class="muted" id="fundNote">Собрано 5%. Осталось $1 418 198.</p>
-        <a class="btn" href="#donate">Помочь строительству</a>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem"><a class="btn" href="https://www.paypal.com/giving/campaigns?campaign_id=HCCVV7HA4FDZ4" target="_blank" rel="noopener">Пожертвовать через PayPal</a><a class="btn ghost" href="#donate">Другие способы</a></div>
       </div>
       <div>
         <ol class="timeline">
@@ -391,6 +383,10 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
           <li><span class="y">Дальше</span><span>Часовня и центр: храм для богослужений и Таинств, трапезная, кухня, залы для лекций, воскресная школа, библиотека, музейный уголок.</span></li>
         </ol>
       </div>
+    </div>
+    <div class="shots">
+      <figure><img src="img/church-southwest.jpg" width="1460" height="988" loading="lazy" alt="Проект храма и приходского зала, вид с юго-запада"><figcaption>Храм и приходской зал, вид с юго-запада</figcaption></figure>
+      <figure><img src="img/church-aerial.jpg" width="1460" height="984" loading="lazy" alt="Проект застройки участка с высоты: храм, парковка, хозяйственные постройки"><figcaption>Участок с высоты: храм, парковка и постройки</figcaption></figure>
     </div>
   </div>
 </section>
@@ -403,7 +399,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
       <p>Приход живёт на пожертвования. Спаси Господи всех, кто помогает!</p>
     </div>
     <div class="ways">
-      <div class="way"><span class="rubric">PayPal</span><b>@stjosephofoptina</b><a href="https://www.paypal.com/giving/campaigns?campaign_id=HCCVV7HA4FDZ4" target="_blank" rel="noopener">Сбор на строительство →</a></div>
+      <div class="way"><span class="rubric">PayPal</span><b>@stjosephofoptina</b><a class="btn" style="justify-self:start;margin-top:.5rem" href="https://www.paypal.com/giving/campaigns?campaign_id=HCCVV7HA4FDZ4" target="_blank" rel="noopener">Donate · PayPal</a></div>
       <div class="way"><span class="rubric">Venmo</span><b>@stjosephofoptina</b></div>
       <div class="way"><span class="rubric">Чек</span><b>St. Joseph of Optina ROCOR</b><span class="muted">PO BOX 64476, Virginia Beach, VA 23467</span></div>
     </div>

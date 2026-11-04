@@ -375,11 +375,12 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
       <p>В 2021 году приход купил участок земли в Чесапике. Там будут храм, трапезная, воскресная школа, библиотека и залы для бесед.</p>
     </div>
     <div class="history">
-      <div class="goal" aria-label="Сбор на первый этап">
-        <p class="rubric">Сбор на первый этап</p>
-        <div class="nums"><b>$81 802</b><span class="muted">из $134 000</span></div>
-        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="134000" aria-valuenow="81802"><i style="width:61%"></i></div>
-        <p class="muted">Собрано 61%. Осталось $52 197.</p>
+      <!-- Сбор: чтобы обновить счётчик, поменяйте числа в data-raised (собрано) и data-goal (цель) -->
+      <div class="goal" id="fund" data-raised="81802" data-goal="1500000" aria-label="Сбор на строительство храма">
+        <p class="rubric">Сбор на строительство храма</p>
+        <div class="nums"><b id="fundRaised">$81 802</b><span class="muted" id="fundGoal">из $1 500 000</span></div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="1500000" aria-valuenow="81802"><i id="fundBar" style="width:5%"></i></div>
+        <p class="muted" id="fundNote">Собрано 5%. Осталось $1 418 198.</p>
         <a class="btn" href="#donate">Помочь строительству</a>
       </div>
       <div>
@@ -573,6 +574,18 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
   });
   setMode('lit');
 
+
+  (function(){
+    var f=document.getElementById('fund');if(!f)return;
+    var r=+f.dataset.raised,g=+f.dataset.goal,pct=Math.min(100,r/g*100);
+    var m=function(v){return '$'+Math.round(v).toLocaleString('ru-RU')};
+    document.getElementById('fundRaised').textContent=m(r);
+    document.getElementById('fundGoal').textContent='из '+m(g);
+    document.getElementById('fundBar').style.width=Math.max(pct,1)+'%';
+    f.querySelector('[role=progressbar]').setAttribute('aria-valuemax',g);
+    f.querySelector('[role=progressbar]').setAttribute('aria-valuenow',r);
+    document.getElementById('fundNote').textContent='Собрано '+(pct<10?pct.toFixed(1).replace('.',','):Math.round(pct))+'%. Осталось '+m(Math.max(g-r,0))+'.';
+  })();
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
       var v=b.getAttribute('data-copy'),done=function(){b.textContent='скопировано';setTimeout(function(){b.textContent='копировать'},1500)};

@@ -219,3 +219,4 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .social .fb iframe{width:100%;max-width:500px;height:640px;background:var(--paper);border:1px solid var(--line)!important}
 .social .ig{display:grid;gap:.6rem;align-content:start;padding:1.5rem;background:var(--paper);border:1px solid var(--line)}
 @media (max-width:860px){.social{grid-template-columns:1fr}}
+.wordmark{font-family:"Cormorant Garamond","Times New Roman",serif;font-weight:500;font-size:1.45rem;text-transform:uppercase;letter-spacing:.14em;line-height:1}

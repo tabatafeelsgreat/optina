@@ -2,7 +2,7 @@
 :root{
   --bg:#f6f5f1; --paper:#ffffff; --ink:#1f2626; --muted:#5d6563; --line:#dcd9d0;
   --red:#a3261b; --red-soft:#f3e3df; --gold:#9a7b33; --band:#ecebe5;
-  --display:"Old Standard TT", "Times New Roman", Georgia, serif;
+  --display:"Kurale", Georgia, "Times New Roman", serif;
   --body:"Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
   --wrap:68rem; --text:38rem;
 }
@@ -53,7 +53,7 @@ p{margin:0}
 .hero{padding-block:clamp(2.5rem,7vw,5.5rem) clamp(2rem,5vw,4rem)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(2rem,5vw,4rem);align-items:center}
 .hero h1{font-size:clamp(2.4rem,5.5vw,4.2rem);letter-spacing:-.01em}
-.hero h1 em{font-style:italic;color:var(--red)}
+.hero h1 em{font-style:normal;color:var(--red)}
 .hero .lead{margin-top:1.4rem;max-width:var(--text);font-size:1.15rem;color:var(--muted)}
 .hero .actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
 .hero .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}

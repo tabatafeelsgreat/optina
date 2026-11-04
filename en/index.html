@@ -355,8 +355,25 @@
   form.addEventListener('submit',function(e){
     e.preventDefault();
     if(!names.value.trim()){res.textContent=modes[mode].names?'Please enter at least one name.':'Please write what we should pray for.';res.hidden=false;names.focus();return}
-    res.textContent='Thank you! You can send the $'+calc()+' donation via PayPal or Venmo to @stjosephofoptina. Online payment on the site is coming soon.';
-    res.hidden=false;
+    var amount=calc(),c=modes[mode],btn=form.querySelector('button[type=submit]');
+    var kind=c.names?document.querySelector('input[name=kind]:checked').value:'';
+    var what=document.querySelector('[role=tab][aria-selected=true]').textContent;
+    var data={_subject:'Prayer request from website: '+what+(kind?' · '+kind:''),_template:'table'};
+    data['Request']=what+(kind?' · '+kind:'');
+    data['Period / candle']=c.opts[sel.value][0];
+    data[c.names?'Names':'Intentions']=names.value.trim();
+    data['From']=document.getElementById('noteFrom').value.trim()||'—';
+    data['Donation']='$'+amount;
+    btn.disabled=true;res.textContent='Sending…';res.hidden=false;
+    fetch('https://formsubmit.co/ajax/frsergiy@russianchurchvb.org',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json()})
+      .then(function(j){
+        if(String(j.success)!=='true')throw new Error(j.message||'');
+        res.innerHTML='Thank you, your request was sent to Fr. Sergiy. You can now make your donation:<br><a class="btn" style="margin-top:.7rem" target="_blank" rel="noopener" href="https://www.paypal.com/paypalme/stjosephofoptina/'+amount+'USD">Donate with PayPal $'+amount+'</a>';
+        names.value='';
+      })
+      .catch(function(){res.textContent='Your request could not be sent. Please try again or call (757) 515-8442.'})
+      .then(function(){btn.disabled=false});
   });
   setMode('lit');
 

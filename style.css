@@ -243,3 +243,6 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .gallery figure{margin:0}
 .gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:1px solid var(--line)}
 .gallery figcaption{font-size:.85rem;color:var(--muted);margin-top:.35rem}
+.future{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:1.5rem 2.5rem;align-items:center;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+.future video{width:100%;height:auto;display:block;background:#000;border:1px solid var(--line)}
+@media (max-width:860px){.future{grid-template-columns:1fr}}

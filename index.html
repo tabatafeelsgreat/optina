@@ -443,7 +443,7 @@ lang: ru
     var b=document.getElementById('soundBtn');if(!b)return;var a=null,t=null;
     function fade(to,done){clearInterval(t);t=setInterval(function(){var v=a.volume+(to>a.volume?.05:-.05);if(Math.abs(to-v)<.05){a.volume=to;clearInterval(t);if(done)done()}else a.volume=v},80)}
     b.addEventListener('click',function(){
-      if(!a){a=new Audio('audio/bells-birds.mp3');a.loop=true;a.volume=0}
+      if(!a){a=new Audio('audio/master-plan-sound.mp3');a.loop=true;a.volume=0}
       if(a.paused){a.play().then(function(){fade(.6)},function(){});b.setAttribute('aria-pressed','true')}
       else{fade(0,function(){a.pause()});b.setAttribute('aria-pressed','false')}
     });

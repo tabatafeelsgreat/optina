@@ -33,6 +33,7 @@ lang: ru
       <a href="#news">Новости</a>
       <a href="#contacts">Контакты</a>
     </nav>
+    <button class="sound" id="soundBtn" type="button" aria-pressed="false" title="Колокола и птицы"><svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg><span>Звон</span></button>
     <a class="lang" href="en/" hreflang="en" lang="en">EN</a>
     <a class="btn" href="#donate">Пожертвовать</a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Меню</button>
@@ -437,6 +438,15 @@ lang: ru
     f.querySelector('[role=progressbar]').setAttribute('aria-valuemax',g);
     f.querySelector('[role=progressbar]').setAttribute('aria-valuenow',r);
     document.getElementById('fundNote').textContent='Собрано '+(pct<10?pct.toFixed(1).replace('.',','):Math.round(pct))+'%. Осталось '+m(Math.max(g-r,0))+'.';
+  })();
+  (function(){
+    var b=document.getElementById('soundBtn');if(!b)return;var a=null,t=null;
+    function fade(to,done){clearInterval(t);t=setInterval(function(){var v=a.volume+(to>a.volume?.05:-.05);if(Math.abs(to-v)<.05){a.volume=to;clearInterval(t);if(done)done()}else a.volume=v},80)}
+    b.addEventListener('click',function(){
+      if(!a){a=new Audio('audio/bells-birds.mp3');a.loop=true;a.volume=0}
+      if(a.paused){a.play().then(function(){fade(.6)},function(){});b.setAttribute('aria-pressed','true')}
+      else{fade(0,function(){a.pause()});b.setAttribute('aria-pressed','false')}
+    });
   })();
   document.querySelectorAll('.news article').forEach(function(a){var b=a.querySelector('.news-body'),btn=a.querySelector('.more-text');if(b&&btn&&b.scrollHeight>b.clientHeight+4){btn.hidden=false;btn.addEventListener('click',function(){a.classList.add('open');btn.hidden=true})}});
   document.querySelectorAll('.copy').forEach(function(b){

@@ -275,10 +275,21 @@ lang: en
     </div>
     <div class="news">
 {%- assign items = site.news | sort: "date" | reverse -%}
-{%- for n in items limit: 8 %}
-      <article>{% if n.image and n.image != "" %}<img src="{{ n.image | relative_url }}" alt="" loading="lazy">{% endif %}<time datetime="{{ n.date | date: "%Y-%m-%d" }}">{{ n.date | date: "%B %-d, %Y" }}</time><h3>{{ (n.title_en | default: n.title) }}</h3><div class="news-body muted">{% if n.body_en and n.body_en != "" %}{{ n.body_en | markdownify }}{% else %}{{ n.content | markdownify }}{% endif %}</div><button class="more-text" type="button" hidden>Read more</button></article>
+{%- for n in items %}
+{%- assign cover = n.image -%}{%- if cover == nil or cover == "" -%}{%- assign cover = n.photos[0] -%}{%- endif -%}
+{%- capture body -%}{% if n.body_en and n.body_en != "" %}{{ n.body_en | markdownify }}{% else %}{{ n.content | markdownify }}{% endif %}{%- endcapture -%}
+      <article class="ncard"{% if forloop.index > 6 %} hidden data-later{% endif %}>
+        <button class="ncard-open" type="button" aria-haspopup="dialog">{% if cover and cover != "" %}<span class="ncard-img"><img src="{{ cover | relative_url }}" alt="" loading="lazy">{% if n.photos.size > 1 %}<span class="ncount">{{ n.photos.size }} photos</span>{% endif %}</span>{% endif %}<time datetime="{{ n.date | date: "%Y-%m-%d" }}">{{ n.date | date: "%B %-d, %Y" }}</time><h3>{{ n.title_en | default: n.title }}</h3><span class="ncard-ex">{{ body | strip_html | truncatewords: 24 }}</span><span class="more-text">Read more{% if n.photos.size > 0 %} and see photos{% endif %} →</span></button>
+        <div class="news-full" hidden><time datetime="{{ n.date | date: "%Y-%m-%d" }}">{{ n.date | date: "%B %-d, %Y" }}</time><h3>{{ n.title_en | default: n.title }}</h3><div class="prose">{{ body }}</div>{% if n.photos.size > 0 %}<div class="nphotos">{% for p in n.photos %}<button type="button" class="nph"><img src="{{ p | relative_url }}" alt="" loading="lazy"></button>{% endfor %}</div>{% endif %}</div>
+      </article>
 {%- endfor %}
     </div>
+    {% if items.size > 6 %}<button class="more" id="newsMore" type="button">All news</button>{% endif %}
+    <dialog class="ndlg" id="newsDlg" aria-label="News">
+      <button class="ndlg-x" type="button" aria-label="Close">×</button>
+      <div class="ndlg-body"></div>
+      <div class="nbig" hidden><button class="nbig-back" type="button">← Back to the story</button><img alt=""><button class="nbig-prev" type="button" aria-label="Previous photo">‹</button><button class="nbig-next" type="button" aria-label="Next photo">›</button></div>
+    </dialog>
   </div>
 </section>
 
@@ -446,7 +457,26 @@ lang: en
       else{fade(0,function(){a.pause()});b.setAttribute('aria-pressed','false')}
     });
   })();
-  document.querySelectorAll('.news article').forEach(function(a){var b=a.querySelector('.news-body'),btn=a.querySelector('.more-text');if(b&&btn&&b.scrollHeight>b.clientHeight+4){btn.hidden=false;btn.addEventListener('click',function(){a.classList.add('open');btn.hidden=true})}});
+  (function(){
+    var dlg=document.getElementById('newsDlg');if(!dlg)return;
+    var body=dlg.querySelector('.ndlg-body'),big=dlg.querySelector('.nbig'),bigImg=big.querySelector('img'),list=[],cur=0;
+    function show(i){cur=(i+list.length)%list.length;bigImg.src=list[cur];big.hidden=false;body.hidden=true}
+    function back(){big.hidden=true;body.hidden=false}
+    document.querySelectorAll('.ncard-open').forEach(function(b){b.addEventListener('click',function(){
+      body.innerHTML=b.parentNode.querySelector('.news-full').innerHTML;back();
+      list=[].map.call(body.querySelectorAll('.nph img'),function(x){return x.src});
+      body.querySelectorAll('.nph').forEach(function(p,i){p.addEventListener('click',function(){show(i)})});
+      if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');dlg.scrollTop=0;
+    })});
+    dlg.querySelector('.ndlg-x').addEventListener('click',function(){dlg.close()});
+    dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+    big.querySelector('.nbig-back').addEventListener('click',back);
+    big.querySelector('.nbig-prev').addEventListener('click',function(){show(cur-1)});
+    big.querySelector('.nbig-next').addEventListener('click',function(){show(cur+1)});
+    dlg.addEventListener('keydown',function(e){if(big.hidden)return;if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
+    var more=document.getElementById('newsMore');
+    if(more)more.addEventListener('click',function(){document.querySelectorAll('[data-later]').forEach(function(a){a.hidden=false});more.hidden=true});
+  })();
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
       var v=b.getAttribute('data-copy'),done=function(){b.textContent='copied';setTimeout(function(){b.textContent='copy'},1500)};

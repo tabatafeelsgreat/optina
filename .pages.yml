@@ -31,8 +31,12 @@ content:
         options:
           format: yyyy-MM-dd
       - name: image
-        label: Фотография
+        label: Главное фото (если пусто, берётся первое из списка ниже)
         type: image
+      - name: photos
+        label: Фотографии к новости
+        type: image
+        list: true
       - name: body
         label: Текст (по-русски)
         type: rich-text

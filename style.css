@@ -252,3 +252,6 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 @keyframes sway{50%{transform:rotate(-12deg)}}
 @media (prefers-reduced-motion:reduce){.sound svg{animation:none!important}}
 @media (max-width:1320px){.sound span{display:none}}
+.wm{display:inline-flex;flex-direction:column;align-items:flex-end;gap:.28rem;line-height:1}
+.wm-sub{font-family:"Cormorant Garamond","Times New Roman",serif;font-weight:500;font-size:.62rem;text-transform:uppercase;letter-spacing:.22em;margin-right:-.22em;color:var(--muted)}
+.wordmark{margin-right:-.14em}

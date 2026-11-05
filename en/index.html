@@ -406,7 +406,7 @@ lang: en
     var amount=calc(),c=modes[mode],btn=form.querySelector('button[type=submit]');
     var kind=c.names?document.querySelector('input[name=kind]:checked').value:'';
     var what=document.querySelector('[role=tab][aria-selected=true]').textContent;
-    var data={_subject:'Prayer request from website: '+what+(kind?' · '+kind:''),_template:'table'};
+    var data={access_key:'7a7598d1-afc7-4bae-9d31-cd4147d14ad9',from_name:'Parish website',subject:'Prayer request from website: '+what+(kind?' · '+kind:'')};
     data['Request']=what+(kind?' · '+kind:'');
     data['Period / candle']=c.opts[sel.value][0];
     data[c.names?'Names':'Intentions']=names.value.trim();
@@ -414,14 +414,14 @@ lang: en
     data['Donation']='$'+amount;
     btn.disabled=true;res.textContent='Sending…';res.hidden=false;
     var ac=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ac)ac.abort()},20000);
-    fetch('https://formsubmit.co/ajax/frsergiy@russianchurchvb.org',{signal:ac?ac.signal:undefined,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+    fetch('https://api.web3forms.com/submit',{signal:ac?ac.signal:undefined,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json()})
       .then(function(j){
-        if(String(j.success)!=='true'){var e=new Error(j.message||'');e.act=/activ/i.test(j.message||'');throw e}
-        res.innerHTML='Thank you, your request was sent to Fr. Sergiy. You can now make your donation:<br><a class="btn" style="margin-top:.7rem" target="_blank" rel="noopener" href="https://www.paypal.com/paypalme/stjosephofoptina/'+amount+'USD">Donate with PayPal $'+amount+'</a>';
+        if(String(j.success)!=='true'){throw new Error(j.message||'')}
+        res.innerHTML='Thank you, your request was sent. You can now make your donation:<br><a class="btn" style="margin-top:.7rem" target="_blank" rel="noopener" href="https://www.paypal.com/paypalme/stjosephofoptina/'+amount+'USD">Donate with PayPal $'+amount+'</a>';
         names.value='';
       })
-      .catch(function(e){res.textContent=e&&e.act?'This form is not activated yet: FormSubmit sent an email to frsergiy@russianchurchvb.org, click Activate Form in it and submit again.':(e&&e.name==='AbortError'?'The server did not respond. Please try again in a minute or call {{ site.data.contacts.priest_phone }}.':'Your request could not be sent. Please try again or call {{ site.data.contacts.priest_phone }}.')})
+      .catch(function(e){res.textContent=e&&e.name==='AbortError'?'The server did not respond. Please try again in a minute or call {{ site.data.contacts.priest_phone }}.':'Your request could not be sent. Please try again or call {{ site.data.contacts.priest_phone }}.'})
       .then(function(){clearTimeout(tm);btn.disabled=false});
   });
   setMode('lit');

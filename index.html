@@ -407,7 +407,7 @@ lang: ru
     var amount=calc(),c=modes[mode],btn=form.querySelector('button[type=submit]');
     var kind=c.names?document.querySelector('input[name=kind]:checked').value:'';
     var what=document.querySelector('[role=tab][aria-selected=true]').textContent;
-    var data={_subject:'Записка с сайта: '+what+(kind?' · '+kind:''),_template:'table'};
+    var data={access_key:'7a7598d1-afc7-4bae-9d31-cd4147d14ad9',from_name:'Сайт прихода',subject:'Записка с сайта: '+what+(kind?' · '+kind:'')};
     data['Что']=what+(kind?' · '+kind:'');
     data['Срок / свеча']=c.opts[sel.value][0];
     data[c.names?'Имена':'Пожелания']=names.value.trim();
@@ -415,14 +415,14 @@ lang: ru
     data['Пожертвование']='$'+amount;
     btn.disabled=true;res.textContent='Отправляем…';res.hidden=false;
     var ac=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ac)ac.abort()},20000);
-    fetch('https://formsubmit.co/ajax/frsergiy@russianchurchvb.org',{signal:ac?ac.signal:undefined,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+    fetch('https://api.web3forms.com/submit',{signal:ac?ac.signal:undefined,method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json()})
       .then(function(j){
-        if(String(j.success)!=='true'){var e=new Error(j.message||'');e.act=/activ/i.test(j.message||'');throw e}
-        res.innerHTML='Спасибо, записка отправлена отцу Сергию. Теперь можно сделать пожертвование:<br><a class="btn" style="margin-top:.7rem" target="_blank" rel="noopener" href="https://www.paypal.com/paypalme/stjosephofoptina/'+amount+'USD">Пожертвовать через PayPal $'+amount+'</a>';
+        if(String(j.success)!=='true'){throw new Error(j.message||'')}
+        res.innerHTML='Спасибо, записка отправлена. Теперь можно сделать пожертвование:<br><a class="btn" style="margin-top:.7rem" target="_blank" rel="noopener" href="https://www.paypal.com/paypalme/stjosephofoptina/'+amount+'USD">Пожертвовать через PayPal $'+amount+'</a>';
         names.value='';
       })
-      .catch(function(e){res.textContent=e&&e.act?'Форма ещё не подтверждена: на почту frsergiy@russianchurchvb.org пришло письмо от FormSubmit, нажмите в нём Activate Form и отправьте записку ещё раз.':(e&&e.name==='AbortError'?'Сервер не ответил. Попробуйте ещё раз через минуту или позвоните: {{ site.data.contacts.priest_phone }}.':'Не получилось отправить записку. Попробуйте ещё раз или позвоните: {{ site.data.contacts.priest_phone }}.')})
+      .catch(function(e){res.textContent=e&&e.name==='AbortError'?'Сервер не ответил. Попробуйте ещё раз через минуту или позвоните: {{ site.data.contacts.priest_phone }}.':'Не получилось отправить записку. Попробуйте ещё раз или позвоните: {{ site.data.contacts.priest_phone }}.'})
       .then(function(){clearTimeout(tm);btn.disabled=false});
   });
   setMode('lit');

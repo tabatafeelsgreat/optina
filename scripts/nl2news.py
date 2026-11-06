@@ -4,6 +4,7 @@ import json, os, re, sys, html, urllib.request
 
 CUTOFF = "2026-08-01"  # issues sent from this date become news automatically
 NEWS = "_news"
+LOGOS = ["1c62525d-8d24-b198-f62c-64c5519c180f"]  # header logo images, not photos
 
 def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (parish website updater)"})
@@ -13,15 +14,20 @@ def norm(s):
     return re.sub(r"\W+", "", s.lower())
 
 def convert(page, ru_title, en_title):
-    imgs = [u for u in re.findall(r'<img[^>]+src="([^"]+)"', page) if "mcusercontent.com" in u]
+    imgs = [u for u in re.findall(r'<img[^>]+src="([^"]+)"', page)
+            if "mcusercontent.com" in u and not any(x in u for x in LOGOS)]
     b = re.sub(r"(?is)<(script|style|head)[^>]*>.*?</\1>", "", page)
     b = re.sub(r"(?i)<br\s*/?>|</p>|</h\d>|</div>|</td>|</li>", "\n", b)
     t = html.unescape(re.sub(r"<[^>]+>", "", b)).replace(" ", " ")
     t = re.sub(r"[͏‌­​]", "", t)
     lines = [l.strip() for l in t.split("\n")]
-    start = next((k + 1 for k, l in enumerate(lines) if re.match(r"(ISSUE|ВЫПУСК)\b", l)), None)
+    # skip Mailchimp's archive bar (Subscribe, Translate + language list) and "View this email" line
+    start = next((k + 1 for k, l in enumerate(lines) if "View this email" in l), None)
     if start is None:
-        start = next((k + 1 for k, l in enumerate(lines) if "View this email" in l), 0)
+        start = next((k + 1 for k, l in enumerate(lines) if "Tiếng Việt" in l), 0)
+    issue = next((k + 1 for k, l in enumerate(lines[start:start + 30], start) if re.match(r"(ISSUE|ВЫПУСК)\b", l)), None)
+    if issue:
+        start = issue
     end = next((k for k, l in enumerate(lines) if l.startswith("Copyright")), len(lines))
     body = lines[start:end]
     while body and (body[-1] == "" or body[-1] in ("OPTINA", "ОПТИНА") or body[-1].startswith("ST. JOSEPH OF OPTINA")):
@@ -36,7 +42,7 @@ def convert(page, ru_title, en_title):
     ru, en, prev = [], [], None
     for bl in blocks:
         txt = "\n".join(bl)
-        if txt == prev or norm(txt) in skip:
+        if txt == prev or norm(txt) in skip or re.fullmatch(r"(OPTINA|ОПТИНА)\n.*VIRGINIA", txt):
             continue
         prev = txt
         cyr = len(re.findall(r"[А-Яа-яЁё]", txt)); lat = len(re.findall(r"[A-Za-z]", txt))

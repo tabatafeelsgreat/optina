@@ -296,3 +296,4 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .nl-more summary{cursor:pointer;color:var(--muted);font-size:.9rem;padding:.4rem 0;border-top:1px solid var(--line)}
 .nl-more[open] summary{color:var(--ink)}
 .nlink{margin:1rem 0 0}.nlink a{color:var(--red);font-weight:500}
+.ncard,.ncard-ex,.prose{overflow-wrap:anywhere}

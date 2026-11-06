@@ -217,7 +217,9 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .social{display:grid;grid-template-columns:minmax(0,500px) minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:start}
 .social .fb{display:grid;gap:.6rem;min-width:0}
 .social .fb iframe{width:100%;max-width:500px;height:640px;background:var(--paper);border:1px solid var(--line)!important}
-.social .ig{display:grid;gap:.6rem;align-content:start;padding:1.5rem;background:var(--paper);border:1px solid var(--line)}
+.social .side{display:grid;gap:1.2rem;align-content:start;min-width:0}
+.social .ig,.social .nl{display:grid;gap:.6rem;align-content:start;padding:1.5rem;background:var(--paper);border:1px solid var(--line)}
+.social .nl .btn,.social .ig .btn{justify-self:start}
 @media (max-width:860px){.social{grid-template-columns:1fr}}
 .wordmark{font-family:"Cormorant Garamond","Times New Roman",serif;font-weight:500;font-size:1.45rem;text-transform:uppercase;letter-spacing:.14em;line-height:1}
 .patron{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.4rem 1.4rem;padding:1.4rem;background:var(--paper);border:1px solid var(--line);border-top:2px solid var(--gold)}

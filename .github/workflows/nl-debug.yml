@@ -1,0 +1,20 @@
+name: nl-debug
+on: push
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -sL -A "Mozilla/5.0" "https://mailchi.mp/stjosephofoptina/is-having-god-in-my-heart-enough-17469148" > a.html
+          wc -c a.html
+          python3 - <<'PY'
+          import re,html
+          s=open("a.html",encoding="utf-8",errors="replace").read()
+          print("IMGS", re.findall(r'<img[^>]+src="([^"]+)"', s)[:15])
+          print("PREVIEW", re.findall(r'<meta[^>]+(?:og:description|og:image)[^>]*>', s))
+          b=re.sub(r"(?is)<(script|style|head)[^>]*>.*?</\1>","",s)
+          b=re.sub(r"(?i)<br\s*/?>|</p>|</h\d>|</div>|</td>","\n",b)
+          t=html.unescape(re.sub(r"<[^>]+>","",b))
+          t=re.sub(r"\n\s*\n+","\n\n",t)
+          print(t[:6000])
+          PY

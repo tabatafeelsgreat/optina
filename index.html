@@ -337,9 +337,17 @@ lang: ru
           {% if nls.size > 0 %}
           <p class="rubric nl-past">Прошлые выпуски</p>
           <ul class="nl-list">
-            {% for i in nls limit:5 %}<li><a href="{{ i.url }}" target="_blank" rel="noopener"><time>{% assign m = i.date | date: "%-m" | plus: 0 %}{{ i.date | date: "%-d" }} {{ mon[m] }} {{ i.date | date: "%Y" }}</time><span>{{ i.title }}</span></a></li>
+            {% for i in nls limit:5 %}<li><a href="{{ i.url }}" target="_blank" rel="noopener"><time>{% assign m = i.date | date: "%-m" | plus: 0 %}{{ i.date | date: "%-d" }} {{ mon[m] }} {{ i.date | date: "%Y" }}</time><span>{{ i.ru | default: i.title }}</span></a></li>
             {% endfor %}
           </ul>
+          {% if nls.size > 5 %}
+          <details class="nl-more"><summary>Ещё выпуски ({{ nls.size | minus: 5 }})</summary>
+          <ul class="nl-list">
+            {% for i in nls offset:5 %}<li><a href="{{ i.url }}" target="_blank" rel="noopener"><time>{% assign m = i.date | date: "%-m" | plus: 0 %}{{ i.date | date: "%-d" }} {{ mon[m] }} {{ i.date | date: "%Y" }}</time><span>{{ i.ru | default: i.title }}</span></a></li>
+            {% endfor %}
+          </ul>
+          </details>
+          {% endif %}
           {% endif %}
           <a class="nl-all" href="https://us4.campaign-archive.com/home/?u=e4b5fdbc56722abc123064202&amp;id=1f29cdbfa9" target="_blank" rel="noopener">Все выпуски рассылки →</a>
         </div>

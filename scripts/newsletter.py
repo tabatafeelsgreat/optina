@@ -42,7 +42,14 @@ old = open(PATH, encoding="utf-8").read() if os.path.exists(PATH) else '{"issues
 for i in json.loads(old).get("issues", []):
     if i["url"] not in found:
         found[i["url"]] = i
-issues = sorted(found.values(), key=lambda x: x["date"], reverse=True)
+issues, seen = [], set()
+for i in sorted(found.values(), key=lambda x: (x["date"], "mailchi.mp" in x["url"]), reverse=True):
+    key = re.sub(r"\W+", "", i["title"].lower())
+    if key not in seen:  # the same issue is often sent twice; keep the newest copy
+        seen.add(key); issues.append(i)
+for i in issues:  # titles look like "Русский · English"
+    parts = re.split(r"\s+[·|]\s+", i["title"], maxsplit=1)
+    i["ru"], i["en"] = (parts[0], parts[1]) if len(parts) == 2 else (i["title"], i["title"])
 if not issues:
     raise SystemExit("no issues found; keeping the old file")
 new = json.dumps({"issues": issues}, ensure_ascii=False, indent=2) + "\n"

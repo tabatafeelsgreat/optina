@@ -1,0 +1,10 @@
+name: nl-debug
+on: push
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          for f in _news/*rassylka*; do u=$(grep '^image' $f | cut -d'"' -f2); curl -s -o x "$u"; echo "$f $(file -b x | cut -c1-80)"; done
+          curl -sL -A Mozilla/5.0 "https://mailchi.mp/stjosephofoptina/is-having-god-in-my-heart-enough-17468308" | grep -o '<img[^>]*mcusercontent[^>]*>' | cut -c1-300

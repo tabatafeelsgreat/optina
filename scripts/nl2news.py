@@ -2,7 +2,7 @@
 Each issue mixes Russian and English sections; Russian blocks go to the RU text, English to the EN text."""
 import json, os, re, sys, html, urllib.request
 
-CUTOFF = "2026-11-02"  # issues sent after this date become news automatically
+CUTOFF = "2026-08-01"  # issues sent from this date become news automatically
 NEWS = "_news"
 
 def get(url):

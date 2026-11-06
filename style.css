@@ -183,10 +183,11 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .goal .nums b{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,4vw,2.4rem);font-variant-numeric:tabular-nums}
 .bar{height:10px;background:var(--band);border:1px solid var(--line)}
 .bar i{display:block;height:100%;background:var(--red)}
-.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2rem}
-.way{background:var(--paper);padding:1.3rem;display:grid;gap:.3rem;min-width:0}
+.ways{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2rem}
+.way{background:var(--paper);padding:1.3rem;display:grid;gap:.3rem;align-content:start;min-width:0}
 .way b{font-weight:600;overflow-wrap:anywhere}
-@media (max-width:760px){.ways{grid-template-columns:1fr}}
+@media (max-width:1000px){.ways{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ways{grid-template-columns:1fr}}
 .plan{margin:0;padding:0;list-style:none;columns:2 13rem;column-gap:2rem}
 .plan li{padding:.45rem 0;border-bottom:1px solid var(--line);break-inside:avoid}
 .reqs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2rem,4vw,4rem)}

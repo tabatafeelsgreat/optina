@@ -12,14 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 scripts/newsletter.py
+      - run: python3 scripts/nl2news.py
       - name: Commit if changed
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet; then echo "nothing new"; exit 0; fi
+          if [ -z "$(git status --porcelain)" ]; then echo "nothing new"; exit 0; fi
           git config user.name "parish-site-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add _data/newsletter.json
+          git add _data/newsletter.json _news
           git commit -m "Update newsletter list"
           git push
           gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

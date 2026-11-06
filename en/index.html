@@ -332,6 +332,15 @@ lang: en
           <h3>News and services by email</h3>
           <p class="muted">Once a week: upcoming services, feasts and parish news. You can unsubscribe at any time.</p>
           <a class="btn" href="https://eepurl.com/hIFwKf" target="_blank" rel="noopener">Subscribe</a>
+          {% assign nls = site.data.newsletter.issues %}
+          {% if nls.size > 0 %}
+          <p class="rubric nl-past">Past issues</p>
+          <ul class="nl-list">
+            {% for i in nls limit:5 %}<li><a href="{{ i.url }}" target="_blank" rel="noopener"><time>{{ i.date | date: "%B %-d, %Y" }}</time><span>{{ i.title }}</span></a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          <a class="nl-all" href="https://us4.campaign-archive.com/home/?u=e4b5fdbc56722abc123064202&amp;id=1f29cdbfa9" target="_blank" rel="noopener">All newsletter issues →</a>
         </div>
       </div>
     </div>

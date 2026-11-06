@@ -284,3 +284,12 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .nbig-prev{left:.4rem}.nbig-next{right:.4rem}
 .ncard[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.ncard-img img{transition:none}}
+.social .nl .nl-past{margin:.8rem 0 0}
+.nl-list{list-style:none;margin:0;padding:0}
+.nl-list li{border-top:1px solid var(--line)}
+.nl-list a{display:grid;gap:.1rem;padding:.5rem 0;color:var(--ink);text-decoration:none}
+.nl-list a:hover span{color:var(--red)}
+.nl-list time{font-size:.8rem;color:var(--muted)}
+.nl-list span{line-height:1.35}
+.nl-all{color:var(--red);font-weight:500;text-decoration:none}
+.nl-all:hover{text-decoration:underline}

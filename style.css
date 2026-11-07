@@ -302,3 +302,4 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .nl-more[open] summary{color:var(--ink)}
 .nlink{margin:1rem 0 0}.nlink a{color:var(--red);font-weight:500}
 .ncard,.ncard-ex,.prose{overflow-wrap:anywhere}
+.social .ig behold-widget{display:block;min-width:0}

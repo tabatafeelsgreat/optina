@@ -216,8 +216,12 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 
 .hero h1{margin-top:.6rem}
 .social{display:grid;grid-template-columns:minmax(0,500px) minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:start}
-.social .fb{display:grid;gap:.6rem;min-width:0}
-.social .fb iframe{width:100%;max-width:500px;height:640px;background:var(--paper);border:1px solid var(--line)!important}
+.social .fb{display:grid;grid-template-rows:auto 1fr;align-self:start;min-width:0;background:var(--paper);border:1px solid var(--line);color:var(--ink);text-decoration:none}
+.social .fb img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.fb-body{display:grid;gap:.6rem;align-content:start;padding:1.5rem}
+.fb-name{font-family:var(--display);font-size:1.45rem;line-height:1.2}
+.social .fb .btn{justify-self:start;margin-top:.3rem}
+.social .fb:hover .fb-name{color:var(--red)}
 .social .side{display:grid;gap:1.2rem;align-content:start;min-width:0}
 .social .ig,.social .wa,.social .nl{display:grid;gap:.6rem;align-content:start;padding:1.5rem;background:var(--paper);border:1px solid var(--line)}
 .social .nl .btn,.social .ig .btn,.social .wa .btn{justify-self:start}

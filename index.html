@@ -30,7 +30,8 @@ lang: ru
       <a href="#sacraments">Таинства</a>
       <a href="#building">Строительство</a>
       <a href="#parish">О приходе</a>
-      <a href="#news">Новости</a>
+{% if site.data.shop.show %}      <a href="#shop">Лавка</a>
+{% endif %}      <a href="#news">Новости</a>
       <a href="#contacts">Контакты</a>
     </nav>
     <button class="sound" id="soundBtn" type="button" aria-pressed="false" title="Колокола и птицы"><svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg><span>Звон</span></button>
@@ -210,6 +211,30 @@ lang: ru
     </div>
   </div>
 </section>
+
+{% assign shop = site.data.shop %}{% if shop.show and shop.items.size > 0 %}
+<section id="shop">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Церковная лавка</p>
+      <h2>Свечи, иконы, подарки</h2>
+      {% if shop.intro_ru != "" %}<p>{{ shop.intro_ru }}</p>{% endif %}
+    </div>
+    <div class="shop">
+{%- for it in shop.items %}{% assign nm = it.name_ru | default: it.name_ru %}{% assign nt = it.note_ru %}
+      <article class="item{% if it.sold_out %} out{% endif %}">
+        {% if it.image and it.image != "" %}<img src="{{ it.image | relative_url }}" alt="{{ nm | escape }}" loading="lazy">{% else %}<span class="item-noimg" aria-hidden="true"></span>{% endif %}
+        <span class="rubric">{% case it.kind %}{% when "candles" %}Свечи{% when "icons" %}Иконы и картины{% when "crafts" %}Поделки{% when "merch" %}С символикой храма{% endcase %}</span>
+        <h3>{{ nm }}</h3>
+        {% if nt and nt != "" %}<small class="muted">{{ nt }}</small>{% endif %}
+        <div class="item-buy"><b>{% if it.price %}${{ it.price }}{% endif %}</b>{% if it.sold_out %}<span class="muted">Нет в наличии</span>{% elsif it.link and it.link != "" %}<a class="btn" href="{{ it.link }}" target="_blank" rel="noopener">Купить</a>{% endif %}</div>
+      </article>
+{%- endfor %}
+    </div>
+    <p class="shop-foot muted">Оплата картой через Square. Заказ можно забрать в храме после службы или получить по почте.{% if shop.store_url and shop.store_url != "" %} <a href="{{ shop.store_url }}" target="_blank" rel="noopener">Все товары лавки →</a>{% endif %}</p>
+  </div>
+</section>
+{% endif %}
 
 <section id="parish" class="band">
   <div class="wrap">

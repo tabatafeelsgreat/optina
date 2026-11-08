@@ -30,7 +30,8 @@ lang: en
       <a href="#sacraments">Sacraments</a>
       <a href="#building">New church</a>
       <a href="#parish">About</a>
-      <a href="#news">News</a>
+{% if site.data.shop.show %}      <a href="#shop">Shop</a>
+{% endif %}      <a href="#news">News</a>
       <a href="#contacts">Contact</a>
     </nav>
     <button class="sound" id="soundBtn" type="button" aria-pressed="false" title="Bells and birds"><svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16"><path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg><span>Bells</span></button>
@@ -210,6 +211,30 @@ lang: en
     </div>
   </div>
 </section>
+
+{% assign shop = site.data.shop %}{% if shop.show and shop.items.size > 0 %}
+<section id="shop">
+  <div class="wrap">
+    <div class="head">
+      <p class="rubric">Parish shop</p>
+      <h2>Candles, icons and gifts</h2>
+      {% if shop.intro_en != "" %}<p>{{ shop.intro_en }}</p>{% endif %}
+    </div>
+    <div class="shop">
+{%- for it in shop.items %}{% assign nm = it.name_en | default: it.name_ru %}{% assign nt = it.note_en %}
+      <article class="item{% if it.sold_out %} out{% endif %}">
+        {% if it.image and it.image != "" %}<img src="{{ it.image | relative_url }}" alt="{{ nm | escape }}" loading="lazy">{% else %}<span class="item-noimg" aria-hidden="true"></span>{% endif %}
+        <span class="rubric">{% case it.kind %}{% when "candles" %}Candles{% when "icons" %}Icons and paintings{% when "crafts" %}Handmade{% when "merch" %}Parish merch{% endcase %}</span>
+        <h3>{{ nm }}</h3>
+        {% if nt and nt != "" %}<small class="muted">{{ nt }}</small>{% endif %}
+        <div class="item-buy"><b>{% if it.price %}${{ it.price }}{% endif %}</b>{% if it.sold_out %}<span class="muted">Sold out</span>{% elsif it.link and it.link != "" %}<a class="btn" href="{{ it.link }}" target="_blank" rel="noopener">Buy</a>{% endif %}</div>
+      </article>
+{%- endfor %}
+    </div>
+    <p class="shop-foot muted">Secure card payment through Square. Pick up your order at church after a service or have it mailed to you.{% if shop.store_url and shop.store_url != "" %} <a href="{{ shop.store_url }}" target="_blank" rel="noopener">See the whole shop →</a>{% endif %}</p>
+  </div>
+</section>
+{% endif %}
 
 <section id="parish" class="band">
   <div class="wrap">

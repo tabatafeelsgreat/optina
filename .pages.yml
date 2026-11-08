@@ -169,3 +169,40 @@ content:
       - { name: email, label: Почта прихода, type: string }
       - { name: priest_phone, label: Телефон настоятеля, type: string }
       - { name: priest_email, label: Почта настоятеля, type: string }
+
+  - name: shop
+    label: Церковная лавка (магазин)
+    type: file
+    path: _data/shop.json
+    format: json
+    fields:
+      - name: show
+        label: Показывать лавку на сайте
+        type: boolean
+      - name: store_url
+        label: "Ссылка на весь магазин в Square (кнопка «Все товары»)"
+        type: string
+      - { name: intro_ru, label: "Пара слов о лавке (по-русски)", type: text }
+      - { name: intro_en, label: "Пара слов о лавке (по-английски)", type: text }
+      - name: items
+        label: Товары
+        type: object
+        list: true
+        fields:
+          - { name: image, label: Фото, type: image }
+          - { name: name_ru, label: "Название (по-русски)", type: string }
+          - { name: name_en, label: "Название (по-английски)", type: string }
+          - { name: price, label: "Цена, $", type: number }
+          - name: kind
+            label: Что это
+            type: select
+            options:
+              values:
+                - { name: candles, label: Свечи }
+                - { name: icons, label: Иконы и картины }
+                - { name: crafts, label: Поделки }
+                - { name: merch, label: "Мерч (Printful)" }
+          - { name: link, label: "Ссылка «Купить» (из Square)", type: string }
+          - { name: note_ru, label: "Примечание (по-русски, например «только самовывоз»)", type: string }
+          - { name: note_en, label: "Примечание (по-английски)", type: string }
+          - { name: sold_out, label: "Нет в наличии", type: boolean }

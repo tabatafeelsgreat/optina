@@ -1,7 +1,19 @@
 {
-  "show": false,
-  "store_url": "",
+  "show": true,
+  "store_url": "https://st-joseph-of-optina-rocor.square.site/",
   "intro_ru": "Свечи, иконы, картины и поделки, сделанные прихожанами, а также вещи с символикой храма. Все доходы идут на строительство храма.",
   "intro_en": "Candles, icons, paintings and handmade gifts from our parishioners, plus items with the parish emblem. All proceeds go to building the church.",
-  "items": []
+  "items": [
+    {
+      "image": "https://153971870.cdn6.editmysite.com/uploads/1/5/3/9/153971870/EHJWN7NNZQI33IFZKQKC5RRA.jpeg",
+      "name_ru": "Футболка «Building here. Remembered there.»",
+      "name_en": "T-shirt “Building here. Remembered there.”",
+      "price": 52,
+      "kind": "merch",
+      "link": "https://st-joseph-of-optina-rocor.square.site/product/unisex-oversized-t-shirt/WPGTCP54EQRMPCWRAQW2DETV",
+      "note_ru": "Оверсайз, размеры XS–3XL, от $52. Печатается под заказ и приходит почтой.",
+      "note_en": "Oversized, sizes XS–3XL, from $52. Printed to order and mailed to you.",
+      "sold_out": false
+    }
+  ]
 }

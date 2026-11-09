@@ -317,3 +317,8 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .shop-foot{margin-top:1.2rem;font-size:.95rem;max-width:44rem}
 @media (max-width:1000px){.shop{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:340px){.shop{grid-template-columns:1fr}}
+.read{display:grid;gap:.4rem;margin-top:1.2rem;padding:1.2rem 1.4rem;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--red);color:var(--ink);text-decoration:none}
+.read b{font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.25}
+.read .muted{font-size:.95rem}
+.read .more-text{color:var(--red);font-weight:500}
+.read:hover b{color:var(--red)}

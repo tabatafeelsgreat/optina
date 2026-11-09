@@ -323,3 +323,8 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .read .muted{font-size:.95rem}
 .read .more-text{color:var(--red);font-weight:500}
 .read:hover b{color:var(--red)}
+.social .nl{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:1rem clamp(1.5rem,4vw,3rem);padding:clamp(1.5rem,3vw,2rem)}
+.nl-sub,.nl-issues{display:grid;gap:.6rem;align-content:start;min-width:0}
+.nl-sub .btn{justify-self:start}
+.social .nl .nl-issues .nl-past{margin:0}
+@media (max-width:760px){.social .nl{grid-template-columns:1fr}}

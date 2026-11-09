@@ -368,28 +368,32 @@ lang: en
           <p class="muted">Announcements, service times and parish news right on your phone.</p>
           <a class="btn ghost" href="https://chat.whatsapp.com/CDZw9P3Lk7WEScDlmaK9WY" target="_blank" rel="noopener">Join the group</a>
         </div>
-        <div class="nl">
-          <p class="rubric">Parish newsletter</p>
-          <h3>News and services by email</h3>
-          <p class="muted">Once a week: upcoming services, feasts and parish news. You can unsubscribe at any time.</p>
-          <a class="btn" href="https://eepurl.com/hIFwKf" target="_blank" rel="noopener">Subscribe</a>
-          {% assign nls = site.data.newsletter.issues %}
-          {% if nls.size > 0 %}
-          <p class="rubric nl-past">Past issues</p>
-          <ul class="nl-list">
-            {% for i in nls limit:5 %}<li><a href="{{ i.url }}" target="_blank" rel="noopener"><time>{{ i.date | date: "%B %-d, %Y" }}</time><span>{{ i.en | default: i.title }}</span></a></li>
-            {% endfor %}
-          </ul>
-          {% if nls.size > 5 %}
-          <details class="nl-more"><summary>More issues ({{ nls.size | minus: 5 }})</summary>
-          <ul class="nl-list">
-            {% for i in nls offset:5 %}<li><a href="{{ i.url }}" target="_blank" rel="noopener"><time>{{ i.date | date: "%B %-d, %Y" }}</time><span>{{ i.en | default: i.title }}</span></a></li>
-            {% endfor %}
-          </ul>
-          </details>
-          {% endif %}
-          {% endif %}
-          <a class="nl-all" href="https://us4.campaign-archive.com/home/?u=e4b5fdbc56722abc123064202&amp;id=1f29cdbfa9" target="_blank" rel="noopener">All newsletter issues →</a>
+      </div>
+      <div class="nl">
+        <div class="nl-sub">
+            <p class="rubric">Parish newsletter</p>
+            <h3>News and services by email</h3>
+            <p class="muted">Once a week: upcoming services, feasts and parish news. You can unsubscribe at any time.</p>
+            <a class="btn" href="https://eepurl.com/hIFwKf" target="_blank" rel="noopener">Subscribe</a>
+        </div>
+        <div class="nl-issues">
+            {% assign nls = site.data.newsletter.issues %}
+            {% if nls.size > 0 %}
+            <p class="rubric nl-past">Past issues</p>
+            <ul class="nl-list">
+              {% for i in nls limit:5 %}<li><a href="{{ i.url }}" target="_blank" rel="noopener"><time>{{ i.date | date: "%B %-d, %Y" }}</time><span>{{ i.en | default: i.title }}</span></a></li>
+              {% endfor %}
+            </ul>
+            {% if nls.size > 5 %}
+            <details class="nl-more"><summary>More issues ({{ nls.size | minus: 5 }})</summary>
+            <ul class="nl-list">
+              {% for i in nls offset:5 %}<li><a href="{{ i.url }}" target="_blank" rel="noopener"><time>{{ i.date | date: "%B %-d, %Y" }}</time><span>{{ i.en | default: i.title }}</span></a></li>
+              {% endfor %}
+            </ul>
+            </details>
+            {% endif %}
+            {% endif %}
+            <a class="nl-all" href="https://us4.campaign-archive.com/home/?u=e4b5fdbc56722abc123064202&amp;id=1f29cdbfa9" target="_blank" rel="noopener">All newsletter issues →</a>
         </div>
       </div>
     </div>

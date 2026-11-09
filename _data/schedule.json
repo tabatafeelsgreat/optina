@@ -21,24 +21,8 @@
     {
       "day": "sat",
       "time": "17:00",
-      "ru": "Вечернее богослужение",
-      "en": "Vespers",
-      "note_ru": "",
-      "note_en": ""
-    },
-    {
-      "day": "sat",
-      "time": "17:45",
-      "ru": "Панихида",
-      "en": "Panikhida (memorial service)",
-      "note_ru": "",
-      "note_en": ""
-    },
-    {
-      "day": "sat",
-      "time": "18:00",
-      "ru": "Исповедь",
-      "en": "Confession",
+      "ru": "Вечернее богослужение, панихида, исповедь",
+      "en": "Vespers, panikhida (memorial service), confession",
       "note_ru": "",
       "note_en": ""
     },

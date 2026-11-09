@@ -227,9 +227,10 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .social .nl .btn,.social .ig .btn,.social .wa .btn{justify-self:start}
 @media (max-width:860px){.social{grid-template-columns:1fr}}
 .wordmark{font-family:"Cormorant Garamond","Times New Roman",serif;font-weight:500;font-size:1.45rem;text-transform:uppercase;letter-spacing:.14em;line-height:1}
-.patron{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.4rem 1.4rem;padding:1.4rem;background:var(--paper);border:1px solid var(--line);border-top:2px solid var(--gold)}
+.patron{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.4rem 2rem;padding:clamp(1.2rem,3vw,2rem);margin-top:3rem;align-content:start;background:var(--paper);border:1px solid var(--line);border-top:2px solid var(--gold)}
 .patron>*{grid-column:2}
-.patron-imgs{grid-column:1;grid-row:1/span 4;display:flex;flex-direction:column;gap:.9rem;width:clamp(120px,22vw,180px)}
+.patron-imgs{grid-column:1;grid-row:1/span 4;display:flex;gap:.9rem;width:clamp(240px,34vw,380px);align-items:flex-start}
+.patron-imgs figure{flex:1}
 .patron figure{margin:0}
 .patron figure img{width:100%;height:auto;display:block;border:1px solid var(--line)}
 .patron figcaption{font-size:.78rem;color:var(--muted);margin-top:.3rem;line-height:1.3}

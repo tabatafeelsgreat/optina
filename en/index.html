@@ -148,7 +148,7 @@ lang: en
       <div class="req"><h3>Funeral</h3><span class="sum">from $250</span><p>The service with which the Church sends the departed into eternal life. The priest can come to the funeral home.</p></div>
       <div class="req"><h3>Panikhida, Moleben</h3><span class="sum">from $25</span><p>A panikhida can also be served at the cemetery on memorial days.</p></div>
       <div class="req"><h3>Blessing of a home or car</h3><span class="sum">from $150</span><p>The priest will come to you.</p></div>
-      <div class="req"><h3>How to arrange</h3><span class="sum"></span><p>Call Fr. Sergiy: <b>{{ site.data.contacts.priest_phone }}</b>, or email {{ site.data.contacts.priest_email }}.</p></div>
+      <div class="req"><h3>How to arrange</h3><span class="sum"></span><p>Call Fr. Sergiy: <b>{{ site.data.contacts.priest_phone }}</b>, or email <span class="em" data-e="{{ site.data.contacts.priest_email | split: "" | reverse | join: "" }}">{{ site.data.contacts.priest_email | replace: "@", " [at] " }}</span>.</p></div>
     </div>
   </div>
 </section>
@@ -409,8 +409,8 @@ lang: en
         <div><a class="btn ghost" href="https://maps.google.com/?q=7220+Granby+St,+Norfolk,+VA+23505" target="_blank" rel="noopener">Open in Maps</a></div>
       </div>
       <div class="kv">
-        <div><span>Parish</span><b>{{ site.data.contacts.phone }}<button class="copy" data-copy="{{ site.data.contacts.phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">copy</button></b><b>{{ site.data.contacts.email }}<button class="copy" data-copy="{{ site.data.contacts.email }}">copy</button></b></div>
-        <div><span>Rector, Priest Sergiy Kosov</span><b>{{ site.data.contacts.priest_phone }}<button class="copy" data-copy="{{ site.data.contacts.priest_phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">copy</button></b><b>{{ site.data.contacts.priest_email }}<button class="copy" data-copy="{{ site.data.contacts.priest_email }}">copy</button></b></div>
+        <div><span>Parish</span><b>{{ site.data.contacts.phone }}<button class="copy" data-copy="{{ site.data.contacts.phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">copy</button></b><b><span class="em" data-e="{{ site.data.contacts.email | split: "" | reverse | join: "" }}">{{ site.data.contacts.email | replace: "@", " [at] " }}</span><button class="copy" data-copy="" data-e="{{ site.data.contacts.email | split: "" | reverse | join: "" }}">copy</button></b></div>
+        <div><span>Rector, Priest Sergiy Kosov</span><b>{{ site.data.contacts.priest_phone }}<button class="copy" data-copy="{{ site.data.contacts.priest_phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">copy</button></b><b><span class="em" data-e="{{ site.data.contacts.priest_email | split: "" | reverse | join: "" }}">{{ site.data.contacts.priest_email | replace: "@", " [at] " }}</span><button class="copy" data-copy="" data-e="{{ site.data.contacts.priest_email | split: "" | reverse | join: "" }}">copy</button></b></div>
         <div><span>Follow us</span><b><a href="https://www.facebook.com/StJosephOfOptinaROCOR/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/st.josephofoptina/" target="_blank" rel="noopener">Instagram</a></b></div>
       </div>
     </div>
@@ -543,6 +543,8 @@ lang: en
     var more=document.getElementById('newsMore');
     if(more)more.addEventListener('click',function(){document.querySelectorAll('[data-later]').forEach(function(a){a.hidden=false});more.hidden=true});
   })();
+  /* почта собирается в браузере, чтобы боты не собирали адреса */
+  document.querySelectorAll('[data-e]').forEach(function(el){var v=el.getAttribute('data-e').split('').reverse().join('');if(el.classList.contains('copy'))el.setAttribute('data-copy',v);else el.innerHTML='<a href="mailto:'+v+'">'+v+'</a>'});
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
       var v=b.getAttribute('data-copy'),done=function(){b.textContent='copied';setTimeout(function(){b.textContent='copy'},1500)};

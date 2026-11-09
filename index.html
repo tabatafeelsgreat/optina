@@ -148,7 +148,7 @@ lang: ru
       <div class="req"><h3>Отпевание</h3><span class="sum">от $250</span><p>Заупокойный чин, которым Церковь провожает усопшего в вечную жизнь. Священник может приехать в похоронный дом.</p></div>
       <div class="req"><h3>Панихида, молебен</h3><span class="sum">от $25</span><p>Панихиду можно заказать и на кладбище в особые поминальные дни.</p></div>
       <div class="req"><h3>Освящение дома или машины</h3><span class="sum">от $150</span><p>Священник приедет к вам.</p></div>
-      <div class="req"><h3>Как заказать</h3><span class="sum"></span><p>Позвоните отцу Сергию: <b>{{ site.data.contacts.priest_phone }}</b>, или напишите на {{ site.data.contacts.priest_email }}.</p></div>
+      <div class="req"><h3>Как заказать</h3><span class="sum"></span><p>Позвоните отцу Сергию: <b>{{ site.data.contacts.priest_phone }}</b>, или напишите на <span class="em" data-e="{{ site.data.contacts.priest_email | split: "" | reverse | join: "" }}">{{ site.data.contacts.priest_email | replace: "@", " [at] " }}</span>.</p></div>
     </div>
   </div>
 </section>
@@ -410,8 +410,8 @@ lang: ru
         <div><a class="btn ghost" href="https://maps.google.com/?q=7220+Granby+St,+Norfolk,+VA+23505" target="_blank" rel="noopener">Открыть на карте</a></div>
       </div>
       <div class="kv">
-        <div><span>Приход</span><b>{{ site.data.contacts.phone }}<button class="copy" data-copy="{{ site.data.contacts.phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">копировать</button></b><b>{{ site.data.contacts.email }}<button class="copy" data-copy="{{ site.data.contacts.email }}">копировать</button></b></div>
-        <div><span>Настоятель, иерей Сергий Косов</span><b>{{ site.data.contacts.priest_phone }}<button class="copy" data-copy="{{ site.data.contacts.priest_phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">копировать</button></b><b>{{ site.data.contacts.priest_email }}<button class="copy" data-copy="{{ site.data.contacts.priest_email }}">копировать</button></b></div>
+        <div><span>Приход</span><b>{{ site.data.contacts.phone }}<button class="copy" data-copy="{{ site.data.contacts.phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">копировать</button></b><b><span class="em" data-e="{{ site.data.contacts.email | split: "" | reverse | join: "" }}">{{ site.data.contacts.email | replace: "@", " [at] " }}</span><button class="copy" data-copy="" data-e="{{ site.data.contacts.email | split: "" | reverse | join: "" }}">копировать</button></b></div>
+        <div><span>Настоятель, иерей Сергий Косов</span><b>{{ site.data.contacts.priest_phone }}<button class="copy" data-copy="{{ site.data.contacts.priest_phone | remove: "(" | remove: ")" | remove: " " | remove: "-" | prepend: "+1" }}">копировать</button></b><b><span class="em" data-e="{{ site.data.contacts.priest_email | split: "" | reverse | join: "" }}">{{ site.data.contacts.priest_email | replace: "@", " [at] " }}</span><button class="copy" data-copy="" data-e="{{ site.data.contacts.priest_email | split: "" | reverse | join: "" }}">копировать</button></b></div>
         <div><span>Мы в соцсетях</span><b><a href="https://www.facebook.com/StJosephOfOptinaROCOR/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/st.josephofoptina/" target="_blank" rel="noopener">Instagram</a></b></div>
       </div>
     </div>
@@ -545,6 +545,8 @@ lang: ru
     var more=document.getElementById('newsMore');
     if(more)more.addEventListener('click',function(){document.querySelectorAll('[data-later]').forEach(function(a){a.hidden=false});more.hidden=true});
   })();
+  /* почта собирается в браузере, чтобы боты не собирали адреса */
+  document.querySelectorAll('[data-e]').forEach(function(el){var v=el.getAttribute('data-e').split('').reverse().join('');if(el.classList.contains('copy'))el.setAttribute('data-copy',v);else el.innerHTML='<a href="mailto:'+v+'">'+v+'</a>'});
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
       var v=b.getAttribute('data-copy'),done=function(){b.textContent='скопировано';setTimeout(function(){b.textContent='копировать'},1500)};

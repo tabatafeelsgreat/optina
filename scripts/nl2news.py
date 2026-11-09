@@ -53,7 +53,8 @@ def convert(page, ru_title, en_title):
         else:
             p = "<p>" + "<br>".join(html.escape(l) for l in bl) + "</p>"
         (ru if cyr >= lat else en).append(p)
-    return (imgs[0] if imgs else ""), "\n".join(ru), "\n".join(en)
+    hide = lambda x: re.sub(r"([\w.+-])@([\w-]+\.[\w.]+)", r"\1 [at] \2", x)  # keep emails away from spam bots
+    return (imgs[0] if imgs else ""), hide("\n".join(ru)), hide("\n".join(en))
 
 def q(s):
     return json.dumps(s, ensure_ascii=False)

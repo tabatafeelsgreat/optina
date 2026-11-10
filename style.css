@@ -14,8 +14,7 @@
   --red:#e0675a; --red-soft:#3a201d; --gold:#cfae62; --band:#1a1f1e; color-scheme:dark}
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html{scroll-padding-top:5.5rem}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
 a{color:var(--red);text-underline-offset:.18em}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--red);outline-offset:2px}

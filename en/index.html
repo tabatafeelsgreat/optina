@@ -431,6 +431,20 @@ lang: en
 
 <script>
 (function(){
+  /* плавная прокрутка к разделам по ссылкам меню */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
+    var id=a.getAttribute('href');if(id.length<2&&id!=='#')return;
+    var t=id==='#'||id==='#top'?document.body:document.querySelector(id);if(!t)return;
+    e.preventDefault();
+    var head=document.querySelector('.top'),off=head?head.offsetHeight+8:0;
+    var y0=window.scrollY,y1=t===document.body?0:Math.max(0,t.getBoundingClientRect().top+y0-off),dy=y1-y0;
+    var dur=Math.min(1100,Math.max(450,Math.abs(dy)*.35)),t0=null;
+    function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
+    function step(ts){if(t0===null)t0=ts;var p=Math.min(1,(ts-t0)/dur);window.scrollTo(0,y0+dy*ease(p));if(p<1)requestAnimationFrame(step)}
+    requestAnimationFrame(step);
+    if(history.pushState)history.pushState(null,'',id==='#'?location.pathname:id);
+  });
   var menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
   menuBtn.addEventListener('click',function(){var o=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o)});
   nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}});

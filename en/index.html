@@ -158,7 +158,7 @@ lang: en
         <div class="nums"><b id="fundRaised">$81,802</b><span class="muted" id="fundGoal">of $1,500,000</span></div>
         <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="{{ site.data.fund.goal }}" aria-valuenow="{{ site.data.fund.raised }}"><i id="fundBar" style="width:5%"></i></div>
         <p class="muted" id="fundNote">5% raised. $1,418,198 to go.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem"><a class="btn" href="https://www.paypal.com/donate?campaign_id=HCCVV7HA4FDZ4" target="_blank" rel="noopener">Donate with PayPal</a><a class="btn" href="https://square.link/u/U9rSkK4a" target="_blank" rel="noopener">Pay by card (Square)</a><a class="btn ghost" href="#donate">Other ways to give</a></div>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem"><a class="btn" href="https://www.paypal.com/donate?campaign_id=HCCVV7HA4FDZ4" target="_blank" rel="noopener">Donate with PayPal</a><a class="btn" href="https://square.link/u/U9rSkK4a" target="_blank" rel="noopener">Pay by card</a><a class="btn ghost" href="#donate">Other ways to give</a></div>
       </div>
       <div>
         <ol class="timeline">
@@ -197,7 +197,7 @@ lang: en
     </div>
     <div class="ways">
       <div class="way"><span class="rubric">PayPal</span><b>@stjosephofoptina</b><a class="btn" style="justify-self:start;margin-top:.5rem" href="https://www.paypal.com/donate?campaign_id=HCCVV7HA4FDZ4" target="_blank" rel="noopener">Donate · PayPal</a></div>
-      <div class="way"><span class="rubric">Square</span><b>Credit or debit card</b><a class="btn" style="justify-self:start;margin-top:.5rem" href="https://square.link/u/U9rSkK4a" target="_blank" rel="noopener">Pay by card</a></div>
+      <div class="way"><span class="rubric">Card payment</span><b>Credit or debit card</b><a class="btn" style="justify-self:start;margin-top:.5rem" href="https://square.link/u/U9rSkK4a" target="_blank" rel="noopener">Pay by card</a></div>
       <div class="way"><span class="rubric">Venmo</span><b>@stjosephofoptina</b></div>
       <div class="way"><span class="rubric">Check</span><b>St. Joseph of Optina ROCOR</b><span class="muted">PO BOX 64476, Virginia Beach, VA 23467</span></div>
     </div>
@@ -223,7 +223,7 @@ lang: en
       </article>
 {%- endfor %}
     </div>
-    <p class="shop-foot muted">Secure card payment through Square. Pick up your order at church after a service or have it mailed to you.{% if shop.store_url and shop.store_url != "" %} <a href="{{ shop.store_url }}" target="_blank" rel="noopener">See the whole shop →</a>{% endif %}</p>
+    <p class="shop-foot muted">Secure card payment. Pick up your order at church after a service or have it mailed to you.{% if shop.store_url and shop.store_url != "" %} <a href="{{ shop.store_url }}" target="_blank" rel="noopener">See the whole shop →</a>{% endif %}</p>
   </div>
 </section>
 {% endif %}

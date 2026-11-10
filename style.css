@@ -328,6 +328,8 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .social .nl .nl-issues .nl-past{margin:0}
 @media (max-width:760px){.social .nl{grid-template-columns:1fr}}
 .nav-lang{display:none}
+.nav-donate{display:none}
+@media (max-width:1260px){.nav .nav-donate{display:block}}
 @media (max-width:520px){
   .top .wrap{gap:.5rem}
   .brand{gap:.4rem}

@@ -1,8 +1,8 @@
 {
   "saturday": {
     "time": "16:00",
-    "ru": "акафист, вечерня, исповедь",
-    "en": "akathist, vespers, confession"
+    "ru": "акафист, вечерня, панихида, исповедь",
+    "en": "akathist, vespers, panikhida, confession"
   },
   "sunday": {
     "time": "9:30",

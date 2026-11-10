@@ -174,7 +174,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .up .feast{color:var(--red);font-family:var(--display);font-size:1.15rem}
 .up .svc{color:var(--muted);font-size:.95rem}
 .up.big .feast{font-weight:700}
-.sched{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2rem,4vw,4rem)}
+.sched{display:grid;grid-template-columns:minmax(0,1fr);max-width:820px;gap:clamp(2rem,4vw,4rem)}
 @media (max-width:860px){.sched{grid-template-columns:1fr}}
 .more{margin-top:1rem;background:none;border:0;color:var(--red);font:500 .95rem var(--body);cursor:pointer;padding:0}
 .goal{background:var(--paper);border:1px solid var(--line);padding:clamp(1.2rem,3vw,2rem);display:grid;gap:1rem}

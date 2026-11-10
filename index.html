@@ -73,18 +73,10 @@ lang: ru
   <div class="wrap">
     <div class="head">
       <p class="rubric">Расписание богослужений</p>
-      <h2>Каждую неделю</h2>
+      <h2>Ближайшие праздники и службы</h2>
     </div>
     <div class="sched">
       <div>
-        <div class="week">
-{%- for r in site.data.schedule.week %}
-          <div class="row"><span class="day">{% include day.html d=r.day %}</span><span class="t">{% include time.html t=r.time %}</span><span>{{ r[page.lang] }}{% assign nk = "note_" | append: page.lang %}{% if r[nk] != "" and r[nk] %}<small>{{ r[nk] }}</small>{% endif %}</span></div>
-{%- endfor %}
-        </div>
-      </div>
-      <div>
-        <p class="rubric" style="margin-bottom:.8rem">Ближайшие праздники и службы</p>
         <div class="upcoming" id="upcoming"></div>
         <button class="more" id="moreBtn" type="button">Показать дальше</button>
       </div>

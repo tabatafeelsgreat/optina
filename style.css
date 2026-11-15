@@ -335,8 +335,16 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
   .brand{gap:.4rem}
   .brand svg{width:30px;height:25px}
   .wordmark{font-size:1.12rem;letter-spacing:.1em}
-  .top .sound,.top .lang{display:none}
+  .top .sound{display:none}
+  .top .lang{padding:.35rem .4rem;font-size:.75rem}
   .nav .nav-lang{display:block}
   .top .btn{padding:.4rem .65rem;font-size:.85rem}
   .menu-btn{margin-left:0;padding:.4rem .6rem}
+}
+@media (max-width:400px){
+  .top .wrap{gap:.35rem}
+  .wordmark{font-size:1rem;letter-spacing:.06em}
+  .brand svg{width:26px;height:22px}
+  .top .btn{padding:.4rem .5rem;font-size:.8rem}
+  .menu-btn{padding:.4rem .5rem;font-size:.85rem}
 }

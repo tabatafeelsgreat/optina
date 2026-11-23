@@ -202,9 +202,15 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 @media (max-width:860px){.bio{grid-template-columns:1fr}}
 .clergy{margin-top:2.5rem}
 .clergy>.rubric{margin-bottom:1rem}
-.clergy .bio{margin-top:2rem;align-items:start}
-.hierarchy{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media (max-width:600px){.hierarchy{grid-template-columns:1fr}}
+.clergy .bio{margin-top:0;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:1.5rem;align-items:stretch}
+.clergy-col{display:grid;gap:1.5rem;align-content:start}
+.hierarchy{grid-template-columns:1fr}
+.priest{background:var(--red-soft);border-left:3px solid var(--red);padding:1.4rem}
+.priest h3{font-size:1.5rem}
+.priest .muted{margin:.35rem 0 0}
+.priest-tl{padding:1.6rem 1.6rem 1.6rem 2rem}
+.priest-tl .timeline li::before{background:var(--red-soft)}
+@media (max-width:860px){.clergy .bio{grid-template-columns:1fr}}
 .news{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem 2rem}
 @media (max-width:900px){.news{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.news{grid-template-columns:1fr}}

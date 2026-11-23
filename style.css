@@ -196,8 +196,9 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .req .sum{font-variant-numeric:tabular-nums;color:var(--red);font-weight:600;white-space:nowrap}
 .req p{grid-column:1/-1;color:var(--muted);font-size:.95rem}
 .relics{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:1.2rem 2rem;margin-top:2rem}
-.relic{display:grid;gap:.2rem;padding-top:.8rem;border-top:1px solid var(--line)}
+.relic{display:grid;gap:.2rem;align-content:start;padding-top:.8rem;border-top:1px solid var(--line)}
 .relic span{font-size:.88rem;color:var(--muted)}
+.relic .person-links{margin-top:.15rem;font-size:.85rem}
 .bio{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(2rem,4vw,4rem);margin-top:2.5rem}
 @media (max-width:860px){.bio{grid-template-columns:1fr}}
 .clergy{margin-top:2.5rem}

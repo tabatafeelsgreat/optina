@@ -210,6 +210,10 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .priest .muted{margin:.35rem 0 0}
 .priest-tl{padding:1.6rem 1.6rem 1.6rem 2rem}
 .priest-tl .timeline li::before{background:var(--red-soft)}
+.person-links{display:flex;flex-wrap:wrap;gap:.3rem 1.1rem;margin-top:.45rem;font-size:.92rem;font-weight:500}
+.person-links a{text-decoration:none}
+.person-links a::after{content:" \2197";font-size:.85em}
+.person-links a:hover{text-decoration:underline}
 @media (max-width:860px){.clergy .bio{grid-template-columns:1fr}}
 .news{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem 2rem}
 @media (max-width:900px){.news{grid-template-columns:repeat(2,minmax(0,1fr))}}

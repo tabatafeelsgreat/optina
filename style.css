@@ -204,7 +204,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:1rem}
 .clergy{margin-top:2.5rem}
 .clergy>.rubric{margin-bottom:1rem}
 .clergy .bio{margin-top:0;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:1.5rem;align-items:stretch}
-.clergy-col{display:grid;gap:1.5rem;align-content:start}
+.clergy-col{display:grid;gap:1.5rem;grid-template-rows:auto 1fr}
 .hierarchy{grid-template-columns:1fr}
 .priest{background:var(--red-soft);border-left:3px solid var(--red);padding:1.4rem}
 .priest h3{font-size:1.5rem}

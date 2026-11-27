@@ -31,6 +31,19 @@
       "sold_out": false
     },
     {
+      "square_id": "L4FLTETP5N2XH7PCTQUQO3EM",
+      "image": "https://153971870.cdn6.editmysite.com/uploads/1/5/3/9/153971870/WQI5Y5MF6CLTUXFLL2UVX2DQ.jpeg",
+      "name_ru": "Футболка «A Saint Is A Sinner»",
+      "name_en": "T-shirt “A Saint Is A Sinner”",
+      "price": 30,
+      "price_from": true,
+      "kind": "merch",
+      "link": "https://st-joseph-of-optina-rocor.square.site/product/unisex-organic-cotton-t-shirt-a-saint-is-a-sinner-/L4FLTETP5N2XH7PCTQUQO3EM",
+      "note_ru": "",
+      "note_en": "",
+      "sold_out": false
+    },
+    {
       "square_id": "S56UH6USEREORP6NDUBL3DOM",
       "image": "https://153971870.cdn6.editmysite.com/uploads/1/5/3/9/153971870/3S7PJQCKZOQ2VJVOZ4GWU7GM.jpeg",
       "name_ru": "Футболка «Sin Builds Walls We Build A Church»",
@@ -39,19 +52,6 @@
       "price_from": true,
       "kind": "merch",
       "link": "https://st-joseph-of-optina-rocor.square.site/product/unisex-organic-cotton-t-shirt-sin-builds-walls-we-build-a-church-/S56UH6USEREORP6NDUBL3DOM",
-      "note_ru": "",
-      "note_en": "",
-      "sold_out": false
-    },
-    {
-      "square_id": "T2ROT3A5BIMUEY6TVN3565UR",
-      "image": "https://153971870.cdn6.editmysite.com/uploads/1/5/3/9/153971870/XA4E3BFZUONPMWKSDGYP5PUY.jpeg",
-      "name_ru": "Футболка «A Saint Is A Sinner»",
-      "name_en": "T-shirt “A Saint Is A Sinner”",
-      "price": 30,
-      "price_from": true,
-      "kind": "merch",
-      "link": "https://st-joseph-of-optina-rocor.square.site/product/unisex-organic-cotton-t-shirt-a-saint-is-a-sinner-/T2ROT3A5BIMUEY6TVN3565UR",
       "note_ru": "",
       "note_en": "",
       "sold_out": false

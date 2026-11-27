@@ -220,7 +220,7 @@ lang: en
         <span class="rubric">{% case it.kind %}{% when "candles" %}Candles{% when "icons" %}Icons and paintings{% when "crafts" %}Handmade{% when "merch" %}Parish merch{% endcase %}</span>
         <h3>{{ nm }}</h3>
         {% if nt and nt != "" %}<small class="muted">{{ nt }}</small>{% endif %}
-        <div class="item-buy"><b>{% if it.price %}${{ it.price }}{% endif %}</b>{% if it.sold_out %}<span class="muted">Sold out</span>{% elsif it.link and it.link != "" %}<a class="btn" href="{{ it.link }}" target="_blank" rel="noopener">Buy</a>{% endif %}</div>
+        <div class="item-buy"><b>{% if it.price %}{% if it.price_from %}from {% endif %}${{ it.price }}{% endif %}</b>{% if it.sold_out %}<span class="muted">Sold out</span>{% elsif it.link and it.link != "" %}<a class="btn" href="{{ it.link }}" target="_blank" rel="noopener">Buy</a>{% endif %}</div>
       </article>
 {%- endfor %}
     </div>

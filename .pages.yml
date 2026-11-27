@@ -185,7 +185,7 @@ content:
       - { name: intro_ru, label: "Пара слов о лавке (по-русски)", type: text }
       - { name: intro_en, label: "Пара слов о лавке (по-английски)", type: text }
       - name: items
-        label: Товары
+        label: "Товары (обновляются сами из Square раз в 4 часа; здесь можно поправить русское название и примечания)"
         type: object
         list: true
         fields:
@@ -206,3 +206,4 @@ content:
           - { name: note_ru, label: "Примечание (по-русски, например «только самовывоз»)", type: string }
           - { name: note_en, label: "Примечание (по-английски)", type: string }
           - { name: sold_out, label: "Нет в наличии", type: boolean }
+          - { name: square_id, label: "Код товара в Square (заполняется сам, не менять)", type: string }

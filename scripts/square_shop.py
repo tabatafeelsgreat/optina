@@ -11,6 +11,8 @@ STORE = "https://st-joseph-of-optina-rocor.square.site/"
 API = (f"https://cdn5.editmysite.com/app/store/api/v28/editor/users/{USER}/sites/{SITE}/products"
        "?page={page}&per_page=100&include=images&visibilities[]=visible")
 PATH = "_data/shop.json"
+COLORS_RU = {"anthracite": "антрацитовая", "deep teal": "тёмно-бирюзовая", "green bay": "серо-зелёная",
+             "kaffa coffee": "кофейная", "misty grey": "светло-серая", "blue grey": "серо-голубая", "blush": "пудровая"}
 KEEP = ("name_ru", "name_en", "kind", "note_ru", "note_en")
 
 def get(url):
@@ -22,6 +24,10 @@ def names(sq):
     sq = re.sub(r"\s+", " ", html.unescape(sq)).strip()
     m = re.search(r'"([^"]+)"', sq)
     if re.search(r"t-?shirt", sq, re.I) and m:
+        color = sq[m.end():].strip(" ,-–")
+        if color:
+            return (f"Футболка «{m.group(1)}», {COLORS_RU.get(color.lower(), color.lower())}",
+                    f"T-shirt “{m.group(1)}”, {color}")
         return f"Футболка «{m.group(1)}»", f"T-shirt “{m.group(1)}”"
     if re.search(r"t-?shirt", sq, re.I):
         model = re.sub(r"(?i)unisex|organic|cotton|t-?shirt", "", sq)
@@ -73,6 +79,7 @@ for p in products:
                 it[k] = prev[k]
     items.append(it)
 
+items.sort(key=lambda it: it["name_en"].lower())
 shop["items"] = items
 with open(PATH, "w", encoding="utf-8") as f:
     json.dump(shop, f, ensure_ascii=False, indent=2)

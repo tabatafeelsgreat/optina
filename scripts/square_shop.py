@@ -37,6 +37,15 @@ def names(sq):
     """Square name -> (ru, en). 'T-Shirt "Text"' becomes 'Футболка «Text»'."""
     sq = re.sub(r"\s+", " ", html.unescape(sq)).strip()
     m = re.search(r'"([^"]+)"', sq)
+    if m and re.search(r"(?i)dress|hoodie|sweatshirt|all-over|men.s", sq):
+        # patterned items: keep the English name, build a Russian one by item type
+        pat = m.group(1)
+        ru_pat = {"Churches": "Церкви", "Angels": "Ангелы", "Reindeer and Trees": "Олени и ёлки"}.get(pat, pat)
+        if re.search(r"(?i)dress", sq): kind = "Платье-футболка"
+        elif re.search(r"(?i)hoodie", sq): kind = "Худи"
+        elif re.search(r"(?i)sweatshirt", sq): kind = "Свитшот"
+        else: kind = "Мужская футболка"
+        return f"{kind} «{ru_pat}»", sq
     if re.search(r"t-?shirt", sq, re.I) and m:
         color = sq[m.end():].strip(" ,-–")
         if color:

@@ -210,7 +210,7 @@ lang: ru
   <div class="wrap">
     <div class="head">
       <p class="rubric">Церковная лавка</p>
-      <h2>Футболки и мерч прихода</h2>
+      <h2>Эксклюзивный авторский мерч прихода</h2>
       {% if shop.intro_ru != "" %}<p>{{ shop.intro_ru }}</p>{% endif %}
     </div>
     <div class="shop">
@@ -224,9 +224,9 @@ lang: ru
       </article>
 {%- endfor %}{%- else %}{%- assign cv = g.items | where: "cover", true | first %}{%- unless cv %}{%- assign cv = g.items | first %}{%- endunless %}
       <article class="item group">
-        <img src="{{ cv.image }}" alt="{% if cv.chip %}{{ cv.group_title_ru }}{% else %}Футболка «{{ g.name }}»{% endif %}" loading="lazy" data-g="img">
+        <img src="{{ cv.image }}" alt="{% if cv.chip %}{{ cv.group_title_ru }}{% else %}Футболка {{ g.name }}{% endif %}" loading="lazy" data-g="img">
         <span class="rubric">С символикой храма</span>
-        <h3>{% if cv.chip %}{{ cv.group_title_ru }}{% else %}Футболка «{{ g.name }}»{% endif %}</h3>
+        <h3>{% if cv.chip %}{{ cv.group_title_ru }}{% else %}Футболка {{ g.name }}{% endif %}</h3>
         <div class="sw" role="group" aria-label="{% if cv.chip %}Изделие{% else %}Цвет{% endif %}">{%- for v in g.items %}<button type="button" class="sw-dot{% if v.chip %} chip{% endif %}{% if v.square_id == cv.square_id %} on{% endif %}" style="--c:{{ v.swatch }}" title="{{ v.color_ru }}" aria-label="{{ v.color_ru }}" aria-pressed="{% if v.square_id == cv.square_id %}true{% else %}false{% endif %}" data-img="{{ v.image }}" data-link="{{ v.link }}" data-price="{% if v.price_from %}от {% endif %}${{ v.price }}" data-name="{{ v.color_ru }}">{% if v.chip %}{{ v.color_ru }}{% endif %}</button>{%- endfor %}</div>
         <small class="muted" data-g="name">{{ cv.color_ru }}</small>
         <div class="item-buy"><b data-g="price">{% if cv.price_from %}от {% endif %}${{ cv.price }}</b><a class="btn" href="{{ cv.link }}" target="_blank" rel="noopener" data-g="link">Купить</a></div>

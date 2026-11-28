@@ -210,7 +210,7 @@ lang: en
   <div class="wrap">
     <div class="head">
       <p class="rubric">Parish shop</p>
-      <h2>Parish T-shirts and merch</h2>
+      <h2>Exclusive original parish merch</h2>
       {% if shop.intro_en != "" %}<p>{{ shop.intro_en }}</p>{% endif %}
     </div>
     <div class="shop">
@@ -224,9 +224,9 @@ lang: en
       </article>
 {%- endfor %}{%- else %}{%- assign cv = g.items | where: "cover", true | first %}{%- unless cv %}{%- assign cv = g.items | first %}{%- endunless %}
       <article class="item group">
-        <img src="{{ cv.image }}" alt="{% if cv.chip %}{{ cv.group_title_en }}{% else %}T-shirt “{{ g.name }}”{% endif %}" loading="lazy" data-g="img">
+        <img src="{{ cv.image }}" alt="{% if cv.chip %}{{ cv.group_title_en }}{% else %}T-shirt {{ g.name }}{% endif %}" loading="lazy" data-g="img">
         <span class="rubric">Parish merch</span>
-        <h3>{% if cv.chip %}{{ cv.group_title_en }}{% else %}T-shirt “{{ g.name }}”{% endif %}</h3>
+        <h3>{% if cv.chip %}{{ cv.group_title_en }}{% else %}T-shirt {{ g.name }}{% endif %}</h3>
         <div class="sw" role="group" aria-label="{% if cv.chip %}Item{% else %}Colour{% endif %}">{%- for v in g.items %}<button type="button" class="sw-dot{% if v.chip %} chip{% endif %}{% if v.square_id == cv.square_id %} on{% endif %}" style="--c:{{ v.swatch }}" title="{{ v.color_en }}" aria-label="{{ v.color_en }}" aria-pressed="{% if v.square_id == cv.square_id %}true{% else %}false{% endif %}" data-img="{{ v.image }}" data-link="{{ v.link }}" data-price="{% if v.price_from %}from {% endif %}${{ v.price }}" data-name="{{ v.color_en }}">{% if v.chip %}{{ v.color_en }}{% endif %}</button>{%- endfor %}</div>
         <small class="muted" data-g="name">{{ cv.color_en }}</small>
         <div class="item-buy"><b data-g="price">{% if cv.price_from %}from {% endif %}${{ cv.price }}</b><a class="btn" href="{{ cv.link }}" target="_blank" rel="noopener" data-g="link">Buy</a></div>

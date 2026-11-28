@@ -124,6 +124,9 @@ except Exception as e:
     print("Square fetch failed, shop left as is:", e)
     sys.exit(0)
 
+def noq(x):  # no quotation marks anywhere in the shop (lali, 2026-11-28)
+    return re.sub(r"\s+", " ", re.sub(r'["\u201c\u201d\u00ab\u00bb]', "", x or "")).strip()
+
 shop = json.load(open(PATH, encoding="utf-8"))
 old = {it.get("square_id"): it for it in shop.get("items", []) if it.get("square_id")}
 items = []
@@ -148,11 +151,18 @@ for p in products:
     if prev:  # keep what was edited by hand in Pages CMS
         for k in KEEP:
             if prev.get(k):
+                if k in ("name_ru", "name_en") and noq(prev[k]) == noq(it[k]):
+                    continue  # unchanged by hand: keep the auto name (grouping needs the quotes)
                 it[k] = prev[k]
     items.append(it)
 
 for it in items:
     it.update(grouping(it))
+
+for it in items:
+    for k in ("name_ru", "name_en", "group_title_ru", "group_title_en"):
+        if k in it:
+            it[k] = noq(it[k])
 items.sort(key=lambda it: (rank(it), it["group"], it.get("order", 0), it["name_en"].lower()))
 shop["items"] = items
 with open(PATH, "w", encoding="utf-8") as f:

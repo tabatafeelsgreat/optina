@@ -7,7 +7,7 @@ for products that are still in Square (matched by square_id).
 import html, json, re, sys, urllib.request
 
 USER, SITE = "153971870", "900513055530914184"
-STORE = "https://st-joseph-of-optina-rocor.square.site/"
+STORE = "https://shop.russianchurchvb.org/"
 API = (f"https://cdn5.editmysite.com/app/store/api/v28/editor/users/{USER}/sites/{SITE}/products"
        "?page={page}&per_page=100&include=images&visibilities[]=visible")
 PATH = "_data/shop.json"
@@ -143,7 +143,7 @@ for p in products:
         "price": num(price["low"]) if price.get("low") is not None else "",
         "price_from": bool(price.get("high")) and price.get("high") != price.get("low"),
         "kind": "merch",
-        "link": p.get("absolute_site_link") or STORE + (p.get("site_link") or ""),
+        "link": STORE + p["site_link"] if p.get("site_link") else (p.get("absolute_site_link") or STORE),
         "note_ru": "", "note_en": "",
         "sold_out": bool((p.get("badges") or {}).get("out_of_stock")),
     }

@@ -18,8 +18,30 @@ SWATCH = {"anthracite": "#4b4746", "deep teal": "#58718a", "green bay": "#7d9a8f
 COVER = {"A Saint Is A Sinner": "anthracite", "Building Here Remembered There": "deep teal",
          "Higgs Boson To Love?": "green bay", "Sin Builds Walls We Build A Church": "kaffa coffee"}
 
+PRINTS = {"Churches": ("churches", "Церкви", "Churches", "hoodie"),
+          "Angels": ("angels", "Ангелы", "Angels", "dress"),
+          "Reindeer and Trees": ("reindeer", "Олени и ёлки", "Reindeer and Trees", "sweatshirt")}
+TYPES = {"hoodie": ("Худи", "Hoodie"), "sweatshirt": ("Свитшот", "Sweatshirt"),
+         "tee": ("Футболка", "T-shirt"), "dress": ("Платье", "Dress")}
+TYPE_ORDER = ["hoodie", "sweatshirt", "tee", "dress"]
+
+def print_grouping(it):
+    """All-over print items (white fabric) are grouped by print; the variants are item types."""
+    m = re.search(r'"(Churches|Angels|Reindeer and Trees)"', it["name_en"])
+    if not m:
+        return None
+    key, ru, en, cover = PRINTS[m.group(1)]
+    n = it["name_en"].lower()
+    t = "dress" if "dress" in n else "hoodie" if "hoodie" in n else "sweatshirt" if "sweatshirt" in n else "tee"
+    return {"group": "print-" + key, "group_title_ru": f"Принт «{ru}»", "group_title_en": f"Print “{en}”",
+            "color_ru": TYPES[t][0], "color_en": TYPES[t][1], "swatch": "", "chip": True,
+            "order": TYPE_ORDER.index(t), "cover": t == cover}
+
 def grouping(it):
     """T-shirt “Text”, Colour -> group/colour fields (empty for single items)."""
+    pg = print_grouping(it)
+    if pg:
+        return pg
     m = re.match(r"T-shirt “(.+)”, (.+)$", it["name_en"])
     if not m:
         return {"group": "", "color_en": "", "color_ru": "", "swatch": "", "cover": False}
@@ -104,7 +126,7 @@ for p in products:
 
 for it in items:
     it.update(grouping(it))
-items.sort(key=lambda it: (bool(it["group"]), it["name_en"].lower()))
+items.sort(key=lambda it: (bool(it["group"]), it["group"], it.get("order", 0), it["name_en"].lower()))
 shop["items"] = items
 with open(PATH, "w", encoding="utf-8") as f:
     json.dump(shop, f, ensure_ascii=False, indent=2)

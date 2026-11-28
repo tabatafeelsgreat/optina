@@ -37,8 +37,33 @@ def print_grouping(it):
             "color_ru": TYPES[t][0], "color_en": TYPES[t][1], "swatch": "", "chip": True,
             "order": TYPE_ORDER.index(t), "cover": t == cover}
 
+KIDS = {"toddler": ("Футболка", "Toddler tee", 0), "baby": ("Боди", "Baby bodysuit", 1),
+        "hoodie": ("Худи", "Kids hoodie", 2), "sweatshirt": ("Свитшот", "Kids sweatshirt", 3)}
+
+def kids_grouping(it):
+    """Children's items: one card «Детское» with a chip per item."""
+    n = it["name_en"].lower()
+    if not re.search(r"toddler|baby|kids", n):
+        return None
+    k = "toddler" if "toddler" in n else "baby" if "baby" in n else "hoodie" if "hoodie" in n else "sweatshirt"
+    ru, en, order = KIDS[k]
+    return {"group": "kids", "group_title_ru": "Детское", "group_title_en": "Kids",
+            "color_ru": ru, "color_en": en, "swatch": "", "chip": True, "order": order, "cover": k == "hoodie"}
+
+# Site order: hoodies, tees with inscriptions, prints, kids
+PRINT_RANK = {"print-churches": 0, "print-angels": 1, "print-reindeer": 2}
+def rank(it):
+    g = it["group"]
+    if not g: return 0
+    if g in PRINT_RANK: return 2 + PRINT_RANK[g]
+    if g == "kids": return 9
+    return 1
+
 def grouping(it):
     """T-shirt “Text”, Colour -> group/colour fields (empty for single items)."""
+    kg = kids_grouping(it)
+    if kg:
+        return kg
     pg = print_grouping(it)
     if pg:
         return pg
@@ -59,6 +84,8 @@ def names(sq):
     """Square name -> (ru, en). 'T-Shirt "Text"' becomes 'Футболка «Text»'."""
     sq = re.sub(r"\s+", " ", html.unescape(sq)).strip()
     m = re.search(r'"([^"]+)"', sq)
+    if m and re.search(r"(?i)toddler|baby|kids", sq):
+        return sq, sq
     if m and re.search(r"(?i)dress|hoodie|sweatshirt|all-over|men.s", sq):
         # patterned items: keep the English name, build a Russian one by item type
         pat = m.group(1)
@@ -126,7 +153,7 @@ for p in products:
 
 for it in items:
     it.update(grouping(it))
-items.sort(key=lambda it: (bool(it["group"]), it["group"], it.get("order", 0), it["name_en"].lower()))
+items.sort(key=lambda it: (rank(it), it["group"], it.get("order", 0), it["name_en"].lower()))
 shop["items"] = items
 with open(PATH, "w", encoding="utf-8") as f:
     json.dump(shop, f, ensure_ascii=False, indent=2)

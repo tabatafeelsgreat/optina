@@ -83,6 +83,11 @@ def get(url):
 def names(sq):
     """Square name -> (ru, en). 'T-Shirt "Text"' becomes 'Футболка «Text»'."""
     sq = re.sub(r"\s+", " ", html.unescape(sq)).strip()
+    if '"' not in sq:  # names may be typed without quotes in Square: put them back for the matching below
+        for k in list(COVER) + ["Reindeer and Trees", "Churches", "Angels"]:
+            if re.search(rf"\b{re.escape(k)}\b", sq):
+                sq = re.sub(rf"\b{re.escape(k)}\b", f'"{k}"', sq, count=1)
+                break
     m = re.search(r'"([^"]+)"', sq)
     if m and re.search(r"(?i)toddler|baby|kids", sq):
         return sq, sq

@@ -224,12 +224,12 @@ lang: ru
       </article>
 {%- endfor %}{%- else %}{%- assign cv = g.items | where: "cover", true | first %}{%- unless cv %}{%- assign cv = g.items | first %}{%- endunless %}
       <article class="item group">
-        <img src="{{ cv.image }}" alt="Футболка «{{ g.name }}»" loading="lazy" data-g="img">
+        <img src="{{ cv.image }}" alt="{% if cv.chip %}{{ cv.group_title_ru }}{% else %}Футболка «{{ g.name }}»{% endif %}" loading="lazy" data-g="img">
         <span class="rubric">С символикой храма</span>
-        <h3>Футболка «{{ g.name }}»</h3>
-        <div class="sw" role="group" aria-label="Цвет">{%- for v in g.items %}<button type="button" class="sw-dot{% if v.square_id == cv.square_id %} on{% endif %}" style="--c:{{ v.swatch }}" title="{{ v.color_ru }}" aria-label="{{ v.color_ru }}" aria-pressed="{% if v.square_id == cv.square_id %}true{% else %}false{% endif %}" data-img="{{ v.image }}" data-link="{{ v.link }}" data-name="{{ v.color_ru }}"></button>{%- endfor %}</div>
+        <h3>{% if cv.chip %}{{ cv.group_title_ru }}{% else %}Футболка «{{ g.name }}»{% endif %}</h3>
+        <div class="sw" role="group" aria-label="{% if cv.chip %}Изделие{% else %}Цвет{% endif %}">{%- for v in g.items %}<button type="button" class="sw-dot{% if v.chip %} chip{% endif %}{% if v.square_id == cv.square_id %} on{% endif %}" style="--c:{{ v.swatch }}" title="{{ v.color_ru }}" aria-label="{{ v.color_ru }}" aria-pressed="{% if v.square_id == cv.square_id %}true{% else %}false{% endif %}" data-img="{{ v.image }}" data-link="{{ v.link }}" data-price="{% if v.price_from %}от {% endif %}${{ v.price }}" data-name="{{ v.color_ru }}">{% if v.chip %}{{ v.color_ru }}{% endif %}</button>{%- endfor %}</div>
         <small class="muted" data-g="name">{{ cv.color_ru }}</small>
-        <div class="item-buy"><b>{% if cv.price_from %}от {% endif %}${{ cv.price }}</b><a class="btn" href="{{ cv.link }}" target="_blank" rel="noopener" data-g="link">Купить</a></div>
+        <div class="item-buy"><b data-g="price">{% if cv.price_from %}от {% endif %}${{ cv.price }}</b><a class="btn" href="{{ cv.link }}" target="_blank" rel="noopener" data-g="link">Купить</a></div>
       </article>
 {%- endif %}{%- endfor %}
     </div>
@@ -245,6 +245,7 @@ document.querySelectorAll('.item.group').forEach(function(card){
       b.classList.add('on');b.setAttribute('aria-pressed','true');
       card.querySelector('[data-g=img]').src=b.dataset.img;
       card.querySelector('[data-g=link]').href=b.dataset.link;
+      card.querySelector('[data-g=price]').textContent=b.dataset.price;
       card.querySelector('[data-g=name]').textContent=b.dataset.name;
     });
   });

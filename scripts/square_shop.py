@@ -13,6 +13,20 @@ API = (f"https://cdn5.editmysite.com/app/store/api/v28/editor/users/{USER}/sites
 PATH = "_data/shop.json"
 COLORS_RU = {"anthracite": "антрацитовая", "deep teal": "тёмно-бирюзовая", "green bay": "серо-зелёная",
              "kaffa coffee": "кофейная", "misty grey": "светло-серая", "blue grey": "серо-голубая", "blush": "пудровая"}
+# Tees of one design in several colours are shown on the site as one card with colour swatches.
+SWATCH = {"anthracite": "#4b4746", "deep teal": "#58718a", "green bay": "#7d9a8f", "kaffa coffee": "#9c766c"}
+COVER = {"A Saint Is A Sinner": "anthracite", "Building Here Remembered There": "deep teal",
+         "Higgs Boson To Love?": "green bay", "Sin Builds Walls We Build A Church": "kaffa coffee"}
+
+def grouping(it):
+    """T-shirt “Text”, Colour -> group/colour fields (empty for single items)."""
+    m = re.match(r"T-shirt “(.+)”, (.+)$", it["name_en"])
+    if not m:
+        return {"group": "", "color_en": "", "color_ru": "", "swatch": "", "cover": False}
+    g, c = m.group(1), m.group(2)
+    return {"group": g, "color_en": c, "color_ru": COLORS_RU.get(c.lower(), c.lower()),
+            "swatch": SWATCH.get(c.lower(), "#999"), "cover": COVER.get(g, "") == c.lower()}
+
 KEEP = ("name_ru", "name_en", "kind", "note_ru", "note_en")
 
 def get(url):
@@ -79,7 +93,9 @@ for p in products:
                 it[k] = prev[k]
     items.append(it)
 
-items.sort(key=lambda it: it["name_en"].lower())
+for it in items:
+    it.update(grouping(it))
+items.sort(key=lambda it: (bool(it["group"]), it["name_en"].lower()))
 shop["items"] = items
 with open(PATH, "w", encoding="utf-8") as f:
     json.dump(shop, f, ensure_ascii=False, indent=2)

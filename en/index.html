@@ -214,7 +214,7 @@ lang: en
       {% if shop.intro_en != "" %}<p>{{ shop.intro_en }}</p>{% endif %}
     </div>
     <div class="shop">
-{%- for it in shop.items %}{% assign nm = it.name_en | default: it.name_ru %}{% assign nt = it.note_en %}
+{%- assign groups = shop.items | group_by: "group" %}{%- for g in groups %}{%- if g.name == "" or g.name == nil %}{%- for it in g.items %}{% assign nm = it.name_en | default: it.name_ru %}{% assign nt = it.note_en %}
       <article class="item{% if it.sold_out %} out{% endif %}">
         {% if it.image and it.image != "" %}<img src="{{ it.image | relative_url }}" alt="{{ nm | escape }}" loading="lazy">{% else %}<span class="item-noimg" aria-hidden="true"></span>{% endif %}
         <span class="rubric">{% case it.kind %}{% when "candles" %}Candles{% when "icons" %}Icons and paintings{% when "crafts" %}Handmade{% when "merch" %}Parish merch{% endcase %}</span>
@@ -222,12 +222,35 @@ lang: en
         {% if nt and nt != "" %}<small class="muted">{{ nt }}</small>{% endif %}
         <div class="item-buy"><b>{% if it.price %}{% if it.price_from %}from {% endif %}${{ it.price }}{% endif %}</b>{% if it.sold_out %}<span class="muted">Sold out</span>{% elsif it.link and it.link != "" %}<a class="btn" href="{{ it.link }}" target="_blank" rel="noopener">Buy</a>{% endif %}</div>
       </article>
-{%- endfor %}
+{%- endfor %}{%- else %}{%- assign cv = g.items | where: "cover", true | first %}{%- unless cv %}{%- assign cv = g.items | first %}{%- endunless %}
+      <article class="item group">
+        <img src="{{ cv.image }}" alt="T-shirt “{{ g.name }}”" loading="lazy" data-g="img">
+        <span class="rubric">Parish merch</span>
+        <h3>T-shirt “{{ g.name }}”</h3>
+        <div class="sw" role="group" aria-label="Colour">{%- for v in g.items %}<button type="button" class="sw-dot{% if v.square_id == cv.square_id %} on{% endif %}" style="--c:{{ v.swatch }}" title="{{ v.color_en }}" aria-label="{{ v.color_en }}" aria-pressed="{% if v.square_id == cv.square_id %}true{% else %}false{% endif %}" data-img="{{ v.image }}" data-link="{{ v.link }}" data-name="{{ v.color_en }}"></button>{%- endfor %}</div>
+        <small class="muted" data-g="name">{{ cv.color_en }}</small>
+        <div class="item-buy"><b>{% if cv.price_from %}from {% endif %}${{ cv.price }}</b><a class="btn" href="{{ cv.link }}" target="_blank" rel="noopener" data-g="link">Buy</a></div>
+      </article>
+{%- endif %}{%- endfor %}
     </div>
     <p class="shop-foot muted">Secure card payment. Pick up your order at church after a service or have it mailed to you.{% if shop.store_url and shop.store_url != "" %} <a href="{{ shop.store_url }}" target="_blank" rel="noopener">See the whole shop →</a>{% endif %}</p>
   </div>
 </section>
 {% endif %}
+{% if shop.show %}<script>
+document.querySelectorAll('.item.group').forEach(function(card){
+  card.querySelectorAll('.sw-dot').forEach(function(b){
+    b.addEventListener('click',function(){
+      card.querySelectorAll('.sw-dot').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false')});
+      b.classList.add('on');b.setAttribute('aria-pressed','true');
+      card.querySelector('[data-g=img]').src=b.dataset.img;
+      card.querySelector('[data-g=link]').href=b.dataset.link;
+      card.querySelector('[data-g=name]').textContent=b.dataset.name;
+    });
+  });
+});
+</script>{% endif %}
+
 
 <section id="parish" class="band">
   <div class="wrap">
